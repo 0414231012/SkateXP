@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SkateXP - Level Up Your Sessions</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <header class="header">
+            <h1 class="logo">SKATE<span class="xp">XP</span></h1>
+            <div class="header-right">
+                <div class="user-level">LVL 12</div>
+                <button class="login-btn-header">LOGIN</button>
+            </div>
+        </header>
+
+        <!-- Main Stats Section -->
+        <section class="stats-grid">
+            <div class="stat-card streak">
+                <div class="stat-number">47</div>
+                <div class="stat-label">DAY STREAK</div>
+                <div class="streak-fire">🔥</div>
+            </div>
+            
+            <div class="stat-card xp-card">
+                <div class="stat-number">2,840</div>
+                <div class="stat-label">TOTAL XP</div>
+                <div class="xp-bar">
+                    <div class="xp-progress"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Session Logger -->
+        <section class="session-section">
+            <button class="session-btn">
+                <span class="btn-icon">🛹</span>
+                I SKATED TODAY
+            </button>
+            <p class="last-session">Last session: 2 hours ago</p>
+        </section>
+
+        <!-- Tricks Tracker -->
+        <section class="tricks-section">
+            <div class="section-header">
+                <h2 class="section-title">TRICK PROGRESS</h2>
+                <button class="add-trick-btn">+ ADD TRICK</button>
+            </div>
+            
+            <!-- Add Trick Form (initially hidden, but visible for design) -->
+            <div class="add-trick-form">
+                <input type="text" class="trick-input" placeholder="Enter trick name (e.g., Kickflip)">
+                <div class="form-buttons">
+                    <button class="save-btn">SAVE</button>
+                    <button class="cancel-btn">CANCEL</button>
+                </div>
+            </div>
+            
+            <div class="tricks-grid">
+                <div class="trick-card">
+                    <div class="trick-name">KICKFLIP</div>
+                    <div class="trick-consistency">85%</div>
+                    <div class="trick-bar">
+                        <div class="trick-progress" style="width: 85%"></div>
+                    </div>
+                </div>
+                
+                <div class="trick-card">
+                    <div class="trick-name">HEELFLIP</div>
+                    <div class="trick-consistency">62%</div>
+                    <div class="trick-bar">
+                        <div class="trick-progress" style="width: 62%"></div>
+                    </div>
+                </div>
+                
+                <div class="trick-card">
+                    <div class="trick-name">TREFLIP</div>
+                    <div class="trick-consistency">23%</div>
+                    <div class="trick-bar">
+                        <div class="trick-progress" style="width: 23%"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Achievements -->
+        <section class="achievements-section">
+            <h2 class="section-title">RECENT BADGES</h2>
+            <div class="badges-grid">
+                <div class="badge earned">
+                    <div class="badge-icon">🏆</div>
+                    <div class="badge-name">WEEK WARRIOR</div>
+                </div>
+                <div class="badge earned">
+                    <div class="badge-icon">⚡</div>
+                    <div class="badge-name">SPEED DEMON</div>
+                </div>
+                <div class="badge locked">
+                    <div class="badge-icon">👑</div>
+                    <div class="badge-name">STREET KING</div>
+                </div>
+            </div>
+        </section>
+    </div>
+</body>
+</html>
