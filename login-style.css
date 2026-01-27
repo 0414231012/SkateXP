@@ -6,60 +6,16 @@
 
 body {
     font-family: 'Arial Black', Arial, sans-serif;
-    background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 50%, #1a1a1a 100%);
+    background: #000000;
     color: #ffffff;
     min-height: 100vh;
     display: flex;
     align-items: center;
     justify-content: center;
-    position: relative;
-    overflow: hidden;
-}
-
-/* Background Graphics */
-.bg-graphics {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    z-index: 0;
-    opacity: 0.1;
-}
-
-.skateboard-icon {
-    position: absolute;
-    font-size: 120px;
-    top: 20%;
-    right: 10%;
-    transform: rotate(25deg);
-    animation: float 6s ease-in-out infinite;
-}
-
-.street-lines {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    height: 100px;
-    background: repeating-linear-gradient(
-        90deg,
-        transparent,
-        transparent 20px,
-        rgba(255, 107, 53, 0.1) 20px,
-        rgba(255, 107, 53, 0.1) 25px
-    );
-}
-
-@keyframes float {
-    0%, 100% { transform: rotate(25deg) translateY(0px); }
-    50% { transform: rotate(25deg) translateY(-20px); }
 }
 
 /* Login Container */
 .login-container {
-    position: relative;
-    z-index: 1;
     width: 100%;
     max-width: 400px;
     padding: 20px;
@@ -67,18 +23,17 @@ body {
 
 /* Login Card */
 .login-card {
-    background: rgba(255, 255, 255, 0.05);
-    backdrop-filter: blur(20px);
-    border: 2px solid rgba(255, 107, 53, 0.3);
-    border-radius: 25px;
+    background: #000000;
+    border: 4px solid #ffffff;
     padding: 40px 30px;
-    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
 }
 
 /* Logo Section */
 .logo-section {
     text-align: center;
     margin-bottom: 40px;
+    border-bottom: 2px solid #ffffff;
+    padding-bottom: 20px;
 }
 
 .logo {
@@ -86,19 +41,21 @@ body {
     font-weight: 900;
     letter-spacing: 3px;
     color: #ffffff;
-    text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
     margin-bottom: 10px;
 }
 
 .xp {
-    color: #ff6b35;
+    color: #000000;
+    background: #ffffff;
+    padding: 4px 8px;
 }
 
 .tagline {
     font-size: 12px;
     letter-spacing: 2px;
-    color: #888888;
-    font-weight: bold;
+    color: #ffffff;
+    font-weight: 900;
+    margin-top: 15px;
 }
 
 /* Login Form */
@@ -113,25 +70,22 @@ body {
 
 .login-input {
     width: 100%;
-    background: rgba(255, 255, 255, 0.08);
-    border: 2px solid rgba(255, 255, 255, 0.2);
-    border-radius: 15px;
+    background: #000000;
+    border: 2px solid #ffffff;
     padding: 18px 50px 18px 20px;
-    color: white;
+    color: #ffffff;
     font-size: 16px;
-    font-weight: bold;
-    transition: all 0.3s ease;
+    font-weight: 900;
 }
 
 .login-input::placeholder {
     color: #888888;
+    font-weight: 900;
 }
 
 .login-input:focus {
     outline: none;
-    border-color: #ff6b35;
-    box-shadow: 0 0 15px rgba(255, 107, 53, 0.3);
-    background: rgba(255, 255, 255, 0.12);
+    background: #111111;
 }
 
 .input-icon {
@@ -140,31 +94,30 @@ body {
     top: 50%;
     transform: translateY(-50%);
     font-size: 18px;
-    opacity: 0.6;
+    color: #ffffff;
 }
 
 .login-btn {
     width: 100%;
-    background: linear-gradient(45deg, #ff6b35, #f7931e);
-    border: none;
-    border-radius: 20px;
+    background: #ffffff;
+    border: 3px solid #ffffff;
     padding: 20px;
     font-size: 18px;
     font-weight: 900;
-    color: white;
+    color: #000000;
     cursor: pointer;
-    box-shadow: 0 10px 30px rgba(255, 107, 53, 0.4);
-    transition: all 0.3s ease;
+    transition: all 0.2s ease;
     display: flex;
     align-items: center;
     justify-content: center;
     gap: 15px;
     margin-top: 10px;
+    letter-spacing: 1px;
 }
 
 .login-btn:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 15px 40px rgba(255, 107, 53, 0.6);
+    background: #000000;
+    color: #ffffff;
 }
 
 .btn-icon {
@@ -178,15 +131,10 @@ body {
 }
 
 .forgot-link {
-    color: #ff6b35;
-    text-decoration: none;
+    color: #ffffff;
+    text-decoration: underline;
     font-size: 14px;
-    font-weight: bold;
-    transition: color 0.3s ease;
-}
-
-.forgot-link:hover {
-    color: #f7931e;
+    font-weight: 900;
 }
 
 .divider {
@@ -200,47 +148,50 @@ body {
     top: 50%;
     left: 0;
     right: 0;
-    height: 1px;
-    background: rgba(255, 255, 255, 0.2);
+    height: 2px;
+    background: #ffffff;
 }
 
 .divider-text {
-    background: rgba(255, 255, 255, 0.05);
+    background: #000000;
     padding: 0 20px;
     font-size: 12px;
-    font-weight: bold;
-    color: #888888;
+    font-weight: 900;
+    color: #ffffff;
     position: relative;
+    letter-spacing: 2px;
 }
 
 .signup-btn {
-    background: transparent;
-    border: 2px solid #ff6b35;
-    border-radius: 15px;
+    background: #000000;
+    border: 2px solid #ffffff;
     padding: 15px 30px;
-    color: #ff6b35;
-    font-weight: bold;
+    color: #ffffff;
+    font-weight: 900;
     font-size: 14px;
     cursor: pointer;
-    transition: all 0.3s ease;
+    transition: all 0.2s ease;
+    letter-spacing: 1px;
 }
 
 .signup-btn:hover {
-    background: rgba(255, 107, 53, 0.1);
-    transform: translateY(-1px);
+    background: #ffffff;
+    color: #000000;
 }
 
 /* Social Section */
 .social-section {
     text-align: center;
+    border-top: 2px solid #ffffff;
+    padding-top: 20px;
 }
 
 .social-text {
     font-size: 12px;
-    color: #888888;
+    color: #ffffff;
     margin-bottom: 15px;
-    font-weight: bold;
-    letter-spacing: 1px;
+    font-weight: 900;
+    letter-spacing: 2px;
 }
 
 .social-buttons {
@@ -252,150 +203,29 @@ body {
 .social-btn {
     width: 50px;
     height: 50px;
-    border: 2px solid rgba(255, 255, 255, 0.2);
-    border-radius: 50%;
-    background: rgba(255, 255, 255, 0.05);
-    color: white;
+    border: 2px solid #ffffff;
+    background: #000000;
+    color: #ffffff;
     font-size: 18px;
     cursor: pointer;
-    transition: all 0.3s ease;
+    transition: all 0.2s ease;
     display: flex;
     align-items: center;
     justify-content: center;
+    font-weight: 900;
 }
 
 .social-btn:hover {
-    border-color: #ff6b35;
-    background: rgba(255, 107, 53, 0.1);
-    transform: translateY(-2px);
+    background: #ffffff;
+    color: #000000;
 }
 
 /* Footer */
 .login-footer {
     text-align: center;
     margin-top: 30px;
-    color: #666666;
+    color: #ffffff;
     font-size: 14px;
-}
-
-/* Responsive */
-@media (max-width: 480px) {
-    .login-container {
-        padding: 10px;
-    }
-    
-    .login-card {
-        padding: 30px 20px;
-    }
-    
-    .logo {
-        font-size: 28px;
-    }
-}
-/* Updated Header Styles */
-.header-right {
-    display: flex;
-    align-items: center;
-    gap: 15px;
-}
-
-.profile-btn {
-    background: rgba(255, 255, 255, 0.1);
-    border: 2px solid rgba(255, 107, 53, 0.5);
-    border-radius: 50%;
-    width: 45px;
-    height: 45px;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    backdrop-filter: blur(10px);
-}
-
-.profile-btn:hover {
-    border-color: #ff6b35;
-    background: rgba(255, 107, 53, 0.2);
-    transform: scale(1.05);
-}
-
-.profile-avatar {
-    color: #ff6b35;
     font-weight: 900;
-    font-size: 14px;
     letter-spacing: 1px;
-}
-
-/* Profile Dropdown (visible for design purposes) */
-.profile-dropdown {
-    position: absolute;
-    top: 70px;
-    right: 20px;
-    background: rgba(255, 255, 255, 0.05);
-    backdrop-filter: blur(20px);
-    border: 2px solid rgba(255, 107, 53, 0.3);
-    border-radius: 15px;
-    padding: 20px;
-    min-width: 200px;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-}
-
-.profile-header {
-    text-align: center;
-    margin-bottom: 20px;
-    padding-bottom: 15px;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-}
-
-.profile-name {
-    font-weight: bold;
-    font-size: 16px;
-    margin-bottom: 5px;
-}
-
-.profile-username {
-    color: #888888;
-    font-size: 12px;
-}
-
-.profile-menu {
-    list-style: none;
-}
-
-.profile-menu li {
-    margin-bottom: 10px;
-}
-
-.profile-menu a {
-    color: #cccccc;
-    text-decoration: none;
-    font-size: 14px;
-    font-weight: bold;
-    padding: 10px;
-    border-radius: 8px;
-    display: block;
-    transition: all 0.3s ease;
-}
-
-.profile-menu a:hover {
-    background: rgba(255, 107, 53, 0.1);
-    color: #ff6b35;
-}
-
-.logout-btn {
-    background: transparent;
-    border: 2px solid #ff6b35;
-    border-radius: 10px;
-    padding: 10px;
-    color: #ff6b35;
-    font-weight: bold;
-    font-size: 12px;
-    cursor: pointer;
-    width: 100%;
-    margin-top: 15px;
-    transition: all 0.3s ease;
-}
-
-.logout-btn:hover {
-    background: rgba(255, 107, 53, 0.1);
 }

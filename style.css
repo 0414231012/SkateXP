@@ -6,10 +6,9 @@
 
 body {
     font-family: 'Arial Black', Arial, sans-serif;
-    background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
+    background: #000000;
     color: #ffffff;
     min-height: 100vh;
-    background-attachment: fixed;
 }
 
 .container {
@@ -25,6 +24,7 @@ body {
     align-items: center;
     margin-bottom: 30px;
     padding: 20px 0;
+    border-bottom: 2px solid #ffffff;
 }
 
 .logo {
@@ -32,20 +32,46 @@ body {
     font-weight: 900;
     letter-spacing: 2px;
     color: #ffffff;
-    text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
 }
 
 .xp {
-    color: #ff6b35;
+    color: #ffffff;
+    background: #000000;
+    padding: 2px 6px;
+    border: 2px solid #ffffff;
+}
+
+.header-right {
+    display: flex;
+    align-items: center;
+    gap: 15px;
 }
 
 .user-level {
-    background: linear-gradient(45deg, #ff6b35, #f7931e);
+    background: #ffffff;
+    color: #000000;
     padding: 8px 16px;
-    border-radius: 20px;
-    font-weight: bold;
+    border-radius: 0;
+    font-weight: 900;
     font-size: 14px;
-    box-shadow: 0 4px 15px rgba(255, 107, 53, 0.3);
+    letter-spacing: 1px;
+}
+
+.login-btn-header {
+    background: #000000;
+    border: 2px solid #ffffff;
+    padding: 8px 16px;
+    color: #ffffff;
+    font-weight: 900;
+    font-size: 12px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    letter-spacing: 1px;
+}
+
+.login-btn-header:hover {
+    background: #ffffff;
+    color: #000000;
 }
 
 /* Stats Grid */
@@ -57,27 +83,25 @@ body {
 }
 
 .stat-card {
-    background: rgba(255, 255, 255, 0.05);
-    border: 2px solid rgba(255, 107, 53, 0.3);
-    border-radius: 15px;
+    background: #000000;
+    border: 3px solid #ffffff;
     padding: 20px;
     text-align: center;
     position: relative;
-    backdrop-filter: blur(10px);
 }
 
 .stat-number {
     font-size: 32px;
     font-weight: 900;
-    color: #ff6b35;
+    color: #ffffff;
     margin-bottom: 5px;
 }
 
 .stat-label {
     font-size: 12px;
-    font-weight: bold;
-    letter-spacing: 1px;
-    color: #cccccc;
+    font-weight: 900;
+    letter-spacing: 2px;
+    color: #ffffff;
 }
 
 .streak-fire {
@@ -88,18 +112,16 @@ body {
 }
 
 .xp-bar {
-    background: rgba(255, 255, 255, 0.1);
+    background: #333333;
     height: 8px;
-    border-radius: 4px;
     margin-top: 10px;
     overflow: hidden;
 }
 
 .xp-progress {
-    background: linear-gradient(90deg, #ff6b35, #f7931e);
+    background: #ffffff;
     height: 100%;
     width: 73%;
-    border-radius: 4px;
 }
 
 /* Session Logger */
@@ -109,26 +131,25 @@ body {
 }
 
 .session-btn {
-    background: linear-gradient(45deg, #ff6b35, #f7931e);
-    border: none;
-    border-radius: 25px;
+    background: #ffffff;
+    border: 3px solid #ffffff;
     padding: 20px 40px;
     font-size: 18px;
     font-weight: 900;
-    color: white;
+    color: #000000;
     cursor: pointer;
-    box-shadow: 0 8px 25px rgba(255, 107, 53, 0.4);
-    transition: transform 0.2s, box-shadow 0.2s;
+    transition: all 0.2s ease;
     display: flex;
     align-items: center;
     justify-content: center;
     gap: 10px;
     width: 100%;
+    letter-spacing: 1px;
 }
 
 .session-btn:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 12px 35px rgba(255, 107, 53, 0.6);
+    background: #000000;
+    color: #ffffff;
 }
 
 .btn-icon {
@@ -137,20 +158,116 @@ body {
 
 .last-session {
     margin-top: 15px;
-    color: #888888;
+    color: #cccccc;
     font-size: 14px;
 }
 
-/* Tricks Section */
+/* Section Header */
+.section-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
 .section-title {
     font-size: 18px;
     font-weight: 900;
     letter-spacing: 2px;
-    margin-bottom: 20px;
     color: #ffffff;
-    text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
+    border-bottom: 2px solid #ffffff;
+    padding-bottom: 5px;
 }
 
+.add-trick-btn {
+    background: #000000;
+    border: 2px solid #ffffff;
+    padding: 8px 16px;
+    color: #ffffff;
+    font-weight: 900;
+    font-size: 12px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    letter-spacing: 1px;
+}
+
+.add-trick-btn:hover {
+    background: #ffffff;
+    color: #000000;
+}
+
+/* Add Trick Form */
+.add-trick-form {
+    background: #000000;
+    border: 3px solid #ffffff;
+    padding: 20px;
+    margin-bottom: 25px;
+}
+
+.trick-input {
+    width: 100%;
+    background: #000000;
+    border: 2px solid #ffffff;
+    padding: 15px;
+    color: #ffffff;
+    font-size: 16px;
+    font-weight: 900;
+    margin-bottom: 15px;
+}
+
+.trick-input::placeholder {
+    color: #888888;
+    font-weight: 900;
+}
+
+.trick-input:focus {
+    outline: none;
+    border-color: #ffffff;
+    background: #111111;
+}
+
+.form-buttons {
+    display: flex;
+    gap: 10px;
+}
+
+.save-btn {
+    background: #ffffff;
+    border: 2px solid #ffffff;
+    padding: 12px 24px;
+    color: #000000;
+    font-weight: 900;
+    font-size: 14px;
+    cursor: pointer;
+    flex: 1;
+    transition: all 0.2s ease;
+    letter-spacing: 1px;
+}
+
+.save-btn:hover {
+    background: #000000;
+    color: #ffffff;
+}
+
+.cancel-btn {
+    background: #000000;
+    border: 2px solid #ffffff;
+    padding: 12px 24px;
+    color: #ffffff;
+    font-weight: 900;
+    font-size: 14px;
+    cursor: pointer;
+    flex: 1;
+    transition: all 0.2s ease;
+    letter-spacing: 1px;
+}
+
+.cancel-btn:hover {
+    background: #ffffff;
+    color: #000000;
+}
+
+/* Tricks Section */
 .tricks-grid {
     display: flex;
     flex-direction: column;
@@ -159,37 +276,35 @@ body {
 }
 
 .trick-card {
-    background: rgba(255, 255, 255, 0.05);
-    border-left: 4px solid #ff6b35;
-    border-radius: 10px;
+    background: #000000;
+    border: 2px solid #ffffff;
+    border-left: 6px solid #ffffff;
     padding: 15px;
-    backdrop-filter: blur(10px);
 }
 
 .trick-name {
-    font-weight: bold;
+    font-weight: 900;
     font-size: 16px;
     margin-bottom: 8px;
+    letter-spacing: 1px;
 }
 
 .trick-consistency {
-    color: #ff6b35;
-    font-weight: bold;
+    color: #ffffff;
+    font-weight: 900;
     font-size: 14px;
     margin-bottom: 8px;
 }
 
 .trick-bar {
-    background: rgba(255, 255, 255, 0.1);
+    background: #333333;
     height: 6px;
-    border-radius: 3px;
     overflow: hidden;
 }
 
 .trick-progress {
-    background: linear-gradient(90deg, #ff6b35, #f7931e);
+    background: #ffffff;
     height: 100%;
-    border-radius: 3px;
 }
 
 /* Achievements */
@@ -200,22 +315,20 @@ body {
 }
 
 .badge {
-    background: rgba(255, 255, 255, 0.05);
-    border-radius: 15px;
+    background: #000000;
+    border: 2px solid #ffffff;
     padding: 20px 10px;
     text-align: center;
-    border: 2px solid transparent;
-    backdrop-filter: blur(10px);
 }
 
 .badge.earned {
-    border-color: #ff6b35;
-    box-shadow: 0 4px 15px rgba(255, 107, 53, 0.2);
+    background: #ffffff;
+    color: #000000;
 }
 
 .badge.locked {
     opacity: 0.4;
-    border-color: #555555;
+    border-color: #666666;
 }
 
 .badge-icon {
@@ -225,127 +338,6 @@ body {
 
 .badge-name {
     font-size: 10px;
-    font-weight: bold;
+    font-weight: 900;
     letter-spacing: 1px;
-}/* Section Header */
-.section-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 20px;
-}
-
-.add-trick-btn {
-    background: rgba(255, 107, 53, 0.2);
-    border: 2px solid #ff6b35;
-    border-radius: 20px;
-    padding: 8px 16px;
-    color: #ff6b35;
-    font-weight: bold;
-    font-size: 12px;
-    cursor: pointer;
-    transition: all 0.3s ease;
-}
-
-.add-trick-btn:hover {
-    background: #ff6b35;
-    color: white;
-    transform: translateY(-1px);
-}
-
-/* Add Trick Form */
-.add-trick-form {
-    background: rgba(255, 255, 255, 0.08);
-    border: 2px solid #ff6b35;
-    border-radius: 15px;
-    padding: 20px;
-    margin-bottom: 25px;
-    backdrop-filter: blur(10px);
-}
-
-.trick-input {
-    width: 100%;
-    background: rgba(255, 255, 255, 0.1);
-    border: 2px solid rgba(255, 255, 255, 0.2);
-    border-radius: 10px;
-    padding: 15px;
-    color: white;
-    font-size: 16px;
-    font-weight: bold;
-    margin-bottom: 15px;
-}
-
-.trick-input::placeholder {
-    color: #888888;
-}
-
-.trick-input:focus {
-    outline: none;
-    border-color: #ff6b35;
-    box-shadow: 0 0 10px rgba(255, 107, 53, 0.3);
-}
-
-.form-buttons {
-    display: flex;
-    gap: 10px;
-}
-
-.save-btn {
-    background: linear-gradient(45deg, #ff6b35, #f7931e);
-    border: none;
-    border-radius: 10px;
-    padding: 12px 24px;
-    color: white;
-    font-weight: bold;
-    font-size: 14px;
-    cursor: pointer;
-    flex: 1;
-    transition: transform 0.2s;
-}
-
-.save-btn:hover {
-    transform: translateY(-1px);
-}
-
-.cancel-btn {
-    background: rgba(255, 255, 255, 0.1);
-    border: 2px solid #666666;
-    border-radius: 10px;
-    padding: 12px 24px;
-    color: #cccccc;
-    font-weight: bold;
-    font-size: 14px;
-    cursor: pointer;
-    flex: 1;
-    transition: all 0.2s;
-}
-
-.cancel-btn:hover {
-    border-color: #ff6b35;
-    color: #ff6b35;
-}
-/* Updated Header Styles */
-.header-right {
-    display: flex;
-    align-items: center;
-    gap: 15px;
-}
-
-.login-btn-header {
-    background: transparent;
-    border: 2px solid #ff6b35;
-    border-radius: 15px;
-    padding: 8px 16px;
-    color: #ff6b35;
-    font-weight: bold;
-    font-size: 12px;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    letter-spacing: 1px;
-}
-
-.login-btn-header:hover {
-    background: rgba(255, 107, 53, 0.1);
-    transform: translateY(-1px);
-    box-shadow: 0 4px 15px rgba(255, 107, 53, 0.3);
 }
