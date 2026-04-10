@@ -14,7 +14,6 @@
             <div class="header-right">
                 <div class="user-level">LVL ?</div>
                 <a class="login-btn-header" href="/login.html">Login</a> <!--Temporary login button to link-->
-                <button class="login-btn-header">LOGIN</button> 
             </div>
         </header>
 
@@ -48,14 +47,14 @@
         <section class="tricks-section">
             <div class="section-header">
                 <h2 class="section-title">TRICK PROGRESS</h2>
-                <button class="add-trick-btn">+ ADD TRICK</button>
+                <button class="add-trick-btn" id="addTrickBtn">+ ADD TRICK</button>
             </div>
             
-            <!-- Add Trick Form (initially hidden, but visible for design) -->
-            <div class="add-trick-form">
+            <!-- Add Trick Form And Tricks Section -->
+            <div id="addTrickForm" class="add-trick-form">
                 <input type="text" class="trick-input" placeholder="Enter trick name (e.g., Kickflip)">
                 <div class="form-buttons">
-                    <button class="save-btn">SAVE</button>
+                    <button class="save-btn" id="save-btn">SAVE</button>
                     <button class="cancel-btn">CANCEL</button>
                 </div>
             </div>
@@ -106,5 +105,6 @@
             </div>
         </section>
     </div>
+    <script src="script.js"></script>
 </body>
 </html>

@@ -192,6 +192,11 @@ body {
     letter-spacing: 1px;
 }
 
+.add-trick-form {
+    display: none;
+}
+
+
 .add-trick-btn:hover {
     background: #ffffff;
     color: #000000;
