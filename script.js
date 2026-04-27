@@ -5,7 +5,7 @@ let addTrickBtn = document.querySelector('.add-trick-btn');
 let addTrickForm = document.querySelector('.add-trick-form');
 let cancelBtn = document.querySelector('.cancel-btn');
 let saveBtn = document.querySelector('.save-btn');
-let trickInput = document.querySelector('.trick-input');  // Fixed this line!
+let trickInput = document.querySelector('.trick-input'); 
 let tricksGrid = document.querySelector('.tricks-grid');
 
 // Function to show the add trick form
@@ -37,9 +37,33 @@ function saveNewTrick() {
     let trickNameDiv = document.createElement('div');
     trickNameDiv.className = 'trick-name';
     trickNameDiv.innerText = trickName.toUpperCase();
+    // Consistency
+    let consistencyDiv = document.createElement('div');
+    consistencyDiv.className = 'trick-consistency';
+    consistencyDiv.innerText = '0%';
     
-    // Your turn: Can you create the consistency div?
-    // Hint: Look at your existing trick cards - what should new tricks start at?
+    // Progress Bar
+    let trickBar = document.createElement('div');
+    trickBar.className = 'trick bar'
+
+     // Create progress bar fill
+    let trickProgress = document.createElement('div');
+    trickProgress.className = 'trick-progress';
+    trickProgress.style.width = '0%';
+    
+    // Put everything together
+    trickBar.appendChild(trickProgress);
+    newTrickCard.appendChild(trickNameDiv);
+    newTrickCard.appendChild(consistencyDiv);
+    newTrickCard.appendChild(trickBar);
+    
+    // Add to tricks grid
+    tricksGrid.appendChild(newTrickCard);
+    
+    // Clean up - hide form and clear input
+    hideAddTrickForm();
+    trickInput.value = '';
+    alert("Added!")
 }
 
 
