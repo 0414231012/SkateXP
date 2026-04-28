@@ -1,5 +1,16 @@
 console.log("Hello World! Welcome to skateXP!");
 
+//login 
+
+let currentUser = localStorage.getItem('currentUser');
+
+if (currentUser === null) {
+    // No user logged in, send back to login
+    window.location.href = 'login.html';
+} else {
+    console.log('Welcome back, ' + currentUser + '!');
+}
+
 // Get the elements we need
 let addTrickBtn = document.querySelector('.add-trick-btn');
 let addTrickForm = document.querySelector('.add-trick-form');
@@ -63,7 +74,6 @@ function saveNewTrick() {
     // Clean up - hide form and clear input
     hideAddTrickForm();
     trickInput.value = '';
-    alert("Added!")
 }
 
 
