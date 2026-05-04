@@ -52,18 +52,22 @@ function updateStreak() {
         let daysDiff = Math.floor((today - lastDate) / (1000 * 60 * 60 * 24));
         
         if (daysDiff === 1) {
-            // Skated yesterday, continue streak
+            // Skated yesterday, continue streak and give motivation
             currentStreak += 1;
+            alert('Streak updated! 😎')
         } else if (daysDiff >= 3) {
             // Missed 3+ days, reset streak
             currentStreak = 1;
+            //alert the user they lost their streak
+            alert('Its been 3 days! you lost your streak!😭')
         } else if (daysDiff === 0) {
             // Already skated today, don't change streak
             return false;
         }
     } else {
-        // First time skating
+        // First time skating and give alert
         currentStreak = 1;
+        alert('Keep skating everyday to get your streak up!, Miss 3 days and it resets!')
     }
     
     // Save the new data
@@ -87,13 +91,21 @@ function handleSkateSession() {
         displayStreak();
         displayLastSession();
         
-        // Give some encouragement!
-        alert('Session logged! Streak updated! 🔥');
     }
 }
 
+// gets current streak from local storage and changes emoji for the streak
 function displayStreak() {
-    let currentStreak = parseInt(localStorage.getItem(currentUser + '_streak')) || 0;
+    let currentStreak = parseInt(localStorage.getItem(currentUser + '_streak'))  ||0;
+    if (currentStreak > 0){ 
+        streakFire.innerText = "🔥"
+    }
+    if (currentStreak >= 10){
+        streakFire.innerText = "⭐️"
+    }
+    if (currentStreak >= 50){
+        streakFire.innerText = "⚡️"
+    }
     streakNumber.innerText = currentStreak
 }
 
@@ -117,7 +129,7 @@ function displayLastSession() {
             if (daysDiff === 1) {
                 lastSessionText.innerText = 'Last session: Yesterday';
             }
-            // need to fix !
+            
             else if (daysDiff > 2) {
                 lastSessionText.innerText = "You lost your streak! Last session: " + daysDiff + " days ago ";
                 let currentStreak = parseInt(localStorage.getItem(currentUser + '_streak')) || 0;
