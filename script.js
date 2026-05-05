@@ -1,6 +1,6 @@
 console.log("Hello World! Welcome to skateXP!");
 
-//login 
+//login stuff
 let currentUser = localStorage.getItem('currentUser');
 
 if (currentUser === null) {
@@ -15,7 +15,7 @@ let loginButton = document.querySelector('.login-btn-header');
 loginButton.innerText = currentUser;
 loginButton.href = '#'; // Remove the link to login.html
 
-// Add logout functionality
+// Add logout functionality when user clicks their name
 loginButton.addEventListener('click', function(event) {
     event.preventDefault(); // Stop the link from working
     
@@ -28,11 +28,14 @@ loginButton.addEventListener('click', function(event) {
     }
 });
 
+//login stuff ends
+
 //get trick counter / session logger elements
 let sessionBtn = document.querySelector('.session-btn');
 let streakNumber = document.querySelector('.streak .stat-number');
 let lastSessionText = document.querySelector('.last-session');
-let streakFire = document.querySelector('.streak-fire')
+let streakFire = document.querySelector('.streak-fire');
+let xpNumber = document.querySelector('.xp-card .stat-number');
 
 // Function to check if user already skated today
 function hasSkatedToday() {
@@ -77,7 +80,7 @@ function updateStreak() {
     return true;
 }
 
-
+//when user clicks the skated today button checks if they skated and or to update 
 function handleSkateSession() {
     // Check if already skated today
     if (hasSkatedToday()) {
@@ -88,6 +91,7 @@ function handleSkateSession() {
     // Update the streak
     if (updateStreak()) {
         // Refresh the display
+        addXP(10);
         displayStreak();
         displayLastSession();
         
@@ -144,6 +148,19 @@ function displayLastSession() {
     } else {
         lastSessionText.innerText = 'Last session: Never';
     }
+}
+
+function addXP(amount) {
+    let currentXP = parseInt(localStorage.getItem(currentUser + '_xp')) || 0;
+    currentXP += amount;
+    localStorage.setItem(currentUser + '_xp', currentXP);
+    displayXP();
+}
+
+function displayXP() {
+    let currentXP = parseInt(localStorage.getItem(currentUser + '_xp')) || 0;
+    xpNumber.innerText = currentXP;
+    
 }
 
 // Get the elements we need for adding a new trick
@@ -212,7 +229,7 @@ function saveNewTrick() {
 }
 
 
-// Add click events
+// Add clickables
 addTrickBtn.addEventListener('click', showAddTrickForm);
 cancelBtn.addEventListener('click', hideAddTrickForm);
 saveBtn.addEventListener('click', saveNewTrick);
@@ -220,3 +237,4 @@ sessionBtn.addEventListener('click', handleSkateSession)
 
 displayStreak();
 displayLastSession();
+displayXP();
