@@ -220,6 +220,11 @@ body {
     color: #000000;
 }
 
+.version {
+    color: rgb(88, 88, 88);
+    text-align: left;
+}
+
 /* Footer */
 .login-footer {
     text-align: center;
@@ -229,3 +234,4 @@ body {
     font-weight: 900;
     letter-spacing: 1px;
 }
+
