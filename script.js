@@ -1,4 +1,4 @@
-console.log("Hello World! Welcome to skateXP!");
+console.log("Welcome to SkateXP!");
 
 //login stuff
 let currentUser = localStorage.getItem('currentUser');
@@ -27,8 +27,6 @@ loginButton.addEventListener('click', function(event) {
         window.location.href = 'login.html';
     }
 });
-
-//login stuff ends
 
 //get trick counter / session logger elements
 let sessionBtn = document.querySelector('.session-btn');
@@ -80,7 +78,8 @@ function updateStreak() {
     return true;
 }
 
-//when user clicks the skated today button checks if they skated and or to update 
+// when user clicks the skated today button
+// checks if they skated and or to update 
 function handleSkateSession() {
     // Check if already skated today
     if (hasSkatedToday()) {
@@ -98,9 +97,11 @@ function handleSkateSession() {
     }
 }
 
-// gets current streak from local storage and changes emoji for the streak
+// gets current streak from local storage and 
+// changes emoji for the streak and number
 function displayStreak() {
     let currentStreak = parseInt(localStorage.getItem(currentUser + '_streak'))  ||0;
+    //change streak icon
     if (currentStreak > 0){ 
         streakFire.innerText = "🔥"
     }
@@ -110,6 +111,7 @@ function displayStreak() {
     if (currentStreak >= 50){
         streakFire.innerText = "⚡️"
     }
+    // change the actual number
     streakNumber.innerText = currentStreak
 }
 
@@ -159,9 +161,32 @@ function addXP(amount) {
 
 function displayXP() {
     let currentXP = parseInt(localStorage.getItem(currentUser + '_xp')) || 0;
+    let levelData = calculateLevel();
+    
+    // Update XP display
     xpNumber.innerText = currentXP;
     
+    // Update progress bar
+    let xpProgress = document.querySelector('.xp-progress');
+    xpProgress.style.width = levelData.progress + '%';
+    
+    // Update level display
+    let userLevel = document.querySelector('.user-level');
+    userLevel.innerText = 'LVL ' + levelData.level;
 }
+
+function calculateLevel() {
+    let currentXP = parseInt(localStorage.getItem(currentUser + '_xp')) || 0;
+    let level = Math.floor(currentXP / 100) + 1; // Level 1, 2, 3, etc.
+    let xpInCurrentLevel = currentXP % 100; // XP progress in current level (0-99)
+    let progressPercent = xpInCurrentLevel; // Since 100 XP per level, this is already a percent
+    
+    return {
+        level: level,
+        progress: progressPercent
+    };
+}
+
 
 // Get the elements we need for adding a new trick
 let addTrickBtn = document.querySelector('.add-trick-btn');
@@ -183,49 +208,108 @@ function hideAddTrickForm() {
 
 // Function to save a new trick
 function saveNewTrick() {
-    // Get the trick name from input
     let trickName = trickInput.value;
     
-    // Check if they actually typed something
     if (trickName === '') {
         alert('Please enter a trick name!');
         return;
     }
     
-    // Create the new trick card
+    // Create and display the trick card
+    createTrickCard(trickName);
+    
+    // Save to localStorage
+    saveTrickToStorage(trickName);
+    
+    // Add XP for learning a new trick
+    addXP(5); // How much XP do you want for adding a trick?
+    
+    hideAddTrickForm();
+    trickInput.value = '';
+    
+    alert('New trick added! +5 XP earned! 🛹');
+}
+
+// Function to delete a trick
+function deleteTrick(trickName, trickCard) {
+    // Confirm deletion
+    if (confirm('Delete ' + trickName + '? You will lose 5 XP.')) {
+        // Remove from display
+        tricksGrid.removeChild(trickCard);
+        
+        // Remove from localStorage
+        let userTricks = JSON.parse(localStorage.getItem(currentUser + '_tricks')) || [];
+        let index = userTricks.indexOf(trickName);
+        if (index > -1) {
+            userTricks.splice(index, 1);
+        }
+        localStorage.setItem(currentUser + '_tricks', JSON.stringify(userTricks));
+        
+        // Remove XP
+        addXP(-5);
+        
+        alert('Trick deleted. -5 XP');
+    }
+}
+
+
+
+// Function to create a trick card element
+function createTrickCard(trickName) {
     let newTrickCard = document.createElement('div');
     newTrickCard.className = 'trick-card';
     
-    // Create the trick name element
     let trickNameDiv = document.createElement('div');
     trickNameDiv.className = 'trick-name';
     trickNameDiv.innerText = trickName.toUpperCase();
-    // Consistency
+    
     let consistencyDiv = document.createElement('div');
     consistencyDiv.className = 'trick-consistency';
     consistencyDiv.innerText = '0%';
     
-    // Progress Bar
     let trickBar = document.createElement('div');
-    trickBar.className = 'trick bar'
-
-     // Create progress bar fill
+    trickBar.className = 'trick-bar';
+    
     let trickProgress = document.createElement('div');
     trickProgress.className = 'trick-progress';
     trickProgress.style.width = '0%';
     
-    // Put everything together
+    // Create delete button
+    let deleteBtn = document.createElement('button');
+    deleteBtn.innerText = 'X';
+    deleteBtn.className = 'delete-trick-btn';
+    deleteBtn.style.color = 'red';
+    deleteBtn.style.cursor = 'pointer';
+    
+    // Add delete functionality
+    deleteBtn.addEventListener('click', function() {
+        deleteTrick(trickName, newTrickCard);
+    });
+    
     trickBar.appendChild(trickProgress);
     newTrickCard.appendChild(trickNameDiv);
     newTrickCard.appendChild(consistencyDiv);
     newTrickCard.appendChild(trickBar);
+    newTrickCard.appendChild(deleteBtn);
     
-    // Add to tricks grid
     tricksGrid.appendChild(newTrickCard);
+}
+
+
+// Function to save a trick to localStorage
+function saveTrickToStorage(trickName) {
+    let userTricks = JSON.parse(localStorage.getItem(currentUser + '_tricks')) || [];
+    userTricks.push(trickName);
+    localStorage.setItem(currentUser + '_tricks', JSON.stringify(userTricks));
+}
+
+// Function to load saved tricks when page loads
+function loadSavedTricks() {
+    let userTricks = JSON.parse(localStorage.getItem(currentUser + '_tricks')) || [];
     
-    // Clean up - hide form and clear input
-    hideAddTrickForm();
-    trickInput.value = '';
+    for (let i = 0; i < userTricks.length; i++) {
+        createTrickCard(userTricks[i]);
+    }
 }
 
 
@@ -238,3 +322,4 @@ sessionBtn.addEventListener('click', handleSkateSession)
 displayStreak();
 displayLastSession();
 displayXP();
+loadSavedTricks();
