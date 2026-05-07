@@ -68,7 +68,6 @@ function updateStreak() {
     } else {
         // First time skating and give alert
         currentStreak = 1;
-        alert('Keep skating everyday to get your streak up!, Miss 3 days and it resets!')
     }
     
     // Save the new data
@@ -83,19 +82,39 @@ function updateStreak() {
 function handleSkateSession() {
     // Check if already skated today
     if (hasSkatedToday()) {
-        alert('You already logged a session today! Keep it up! 🛹');
+        // Change button temporarily
+        sessionBtn.innerText = '✅ Already logged today!';
+        sessionBtn.style.backgroundColor = '#orange';
+        
+        // Reset after 2 seconds
+        setTimeout(function() {
+            sessionBtn.innerHTML = '<span class="btn-icon">🛹</span> I SKATED TODAY';
+            sessionBtn.style.backgroundColor = ''; // Reset to original
+        }, 2000);
         return;
     }
     
     // Update the streak
     if (updateStreak()) {
-        // Refresh the display
+        // Add XP for daily session
         addXP(10);
+        
+        // Refresh the display
         displayStreak();
         displayLastSession();
         
+        // Show success feedback
+        sessionBtn.innerText = '🔥 +10 XP! Session logged!';
+        sessionBtn.style.backgroundColor = '#4CAF50';
+        
+        // Reset after 2 seconds
+        setTimeout(function() {
+            sessionBtn.innerHTML = '<span class="btn-icon">🛹</span> I SKATED TODAY';
+            sessionBtn.style.backgroundColor = '';
+        }, 2000);
     }
 }
+
 
 // gets current streak from local storage and 
 // changes emoji for the streak and number
@@ -210,102 +229,223 @@ function hideAddTrickForm() {
 function saveNewTrick() {
     let trickName = trickInput.value;
     
+    // Disable the save button immediately
+    saveBtn.disabled = true;
+    
     if (trickName === '') {
-        alert('Please enter a trick name!');
+        trickInput.placeholder = 'Please enter a trick name!';
+        trickInput.style.borderColor = 'red';
+        saveBtn.disabled = false; // Re-enable if error
+        return;
+    }
+    
+    // Check if trick already exists
+    let userTricks = getUserTricks();
+    let trickNameUpper = trickName.toUpperCase();
+    
+    let trickExists = userTricks.some(function(trick) {
+        return trick.name.toUpperCase() === trickNameUpper;
+    });
+    
+    if (trickExists) {
+        trickInput.value = '❌ Trick already exists!';
+        trickInput.style.color = 'red';
+        
+        setTimeout(function() {
+            trickInput.value = '';
+            trickInput.style.color = '';
+            saveBtn.disabled = false; // Re-enable
+        }, 1500);
         return;
     }
     
     // Create and display the trick card
-    createTrickCard(trickName);
+    let trickData = { name: trickName, level: 1 };
+    createTrickCard(trickData);
     
     // Save to localStorage
-    saveTrickToStorage(trickName);
+    saveTrickToStorage(trickData);
     
     // Add XP for learning a new trick
-    addXP(5); // How much XP do you want for adding a trick?
+    addXP(5);
     
-    hideAddTrickForm();
-    trickInput.value = '';
+    // Show success in the input field
+    trickInput.value = '✅ Trick added! +5 XP';
+    trickInput.style.color = 'green';
     
-    alert('New trick added! +5 XP earned! 🛹');
+    // Reset and hide after 1.5 seconds
+    setTimeout(function() {
+        hideAddTrickForm();
+        trickInput.value = '';
+        trickInput.style.color = '';
+        trickInput.style.borderColor = '';
+        trickInput.placeholder = 'Enter trick name (e.g., Kickflip)';
+        saveBtn.disabled = false; // Re-enable when done
+    }, 1500);
 }
+
+function showAddTrickForm() {
+    addTrickForm.style.display = 'block';
+    saveBtn.disabled = false; // Make sure it's enabled when opening
+}
+
+function hideAddTrickForm() {
+    addTrickForm.style.display = 'none';
+    saveBtn.disabled = false; // Re-enable when cancelling
+}
+
+
 
 // Function to delete a trick
 function deleteTrick(trickName, trickCard) {
-    // Confirm deletion
     if (confirm('Delete ' + trickName + '? You will lose 5 XP.')) {
-        // Remove from display
-        tricksGrid.removeChild(trickCard);
+        // Add fade effect before removing
+        trickCard.style.opacity = '0.5';
         
-        // Remove from localStorage
-        let userTricks = JSON.parse(localStorage.getItem(currentUser + '_tricks')) || [];
-        let index = userTricks.indexOf(trickName);
-        if (index > -1) {
-            userTricks.splice(index, 1);
-        }
-        localStorage.setItem(currentUser + '_tricks', JSON.stringify(userTricks));
-        
-        // Remove XP
-        addXP(-5);
-        
-        alert('Trick deleted. -5 XP');
+        setTimeout(function() {
+            // Remove from display
+            tricksGrid.removeChild(trickCard);
+            
+            // Remove from localStorage
+            let userTricks = getUserTricks();
+            let index = userTricks.findIndex(function(trick) {
+                return trick.name === trickName;
+            });
+            if (index > -1) {
+                userTricks.splice(index, 1);
+            }
+            setUserTricks(userTricks);
+            
+            // Remove XP and show update
+            addXP(-5);
+        }, 300);
     }
 }
 
 
 
+
 // Function to create a trick card element
-function createTrickCard(trickName) {
+function createTrickCard(trickData) {
+    let trickName = trickData.name;
+    let trickLevel = trickData.level || 1;
+
     let newTrickCard = document.createElement('div');
     newTrickCard.className = 'trick-card';
+    
+    let trickInfo = document.createElement('div');
+    trickInfo.className = 'trick-info';
     
     let trickNameDiv = document.createElement('div');
     trickNameDiv.className = 'trick-name';
     trickNameDiv.innerText = trickName.toUpperCase();
     
-    let consistencyDiv = document.createElement('div');
-    consistencyDiv.className = 'trick-consistency';
-    consistencyDiv.innerText = '0%';
+    let trickLevelDiv = document.createElement('div');
+    trickLevelDiv.className = 'trick-consistency';
+    trickLevelDiv.innerText = 'LEVEL ' + trickLevel;
     
     let trickBar = document.createElement('div');
     trickBar.className = 'trick-bar';
     
     let trickProgress = document.createElement('div');
     trickProgress.className = 'trick-progress';
-    trickProgress.style.width = '0%';
+    trickProgress.style.width = Math.min(trickLevel * 15, 100) + '%';
     
-    // Create delete button
+    let actionGroup = document.createElement('div');
+    actionGroup.className = 'trick-actions';
+
+    let markBtn = document.createElement('button');
+    markBtn.innerText = 'MARK';
+    markBtn.className = 'mark-trick-btn';
+    markBtn.title = 'Mark trick complete and earn XP';
+    
+    markBtn.addEventListener('click', function() {
+        markTrickCompleted(trickName, newTrickCard);
+    });
+
     let deleteBtn = document.createElement('button');
-    deleteBtn.innerText = 'X';
+    deleteBtn.innerText = '×';
     deleteBtn.className = 'delete-trick-btn';
-    deleteBtn.style.color = 'red';
-    deleteBtn.style.cursor = 'pointer';
+    deleteBtn.title = 'Delete trick';
     
-    // Add delete functionality
     deleteBtn.addEventListener('click', function() {
         deleteTrick(trickName, newTrickCard);
     });
     
     trickBar.appendChild(trickProgress);
-    newTrickCard.appendChild(trickNameDiv);
-    newTrickCard.appendChild(consistencyDiv);
-    newTrickCard.appendChild(trickBar);
-    newTrickCard.appendChild(deleteBtn);
+    trickInfo.appendChild(trickNameDiv);
+    trickInfo.appendChild(trickLevelDiv);
+    trickInfo.appendChild(trickBar);
+    actionGroup.appendChild(markBtn);
+    actionGroup.appendChild(deleteBtn);
+    
+    newTrickCard.appendChild(trickInfo);
+    newTrickCard.appendChild(actionGroup);
     
     tricksGrid.appendChild(newTrickCard);
 }
 
-
-// Function to save a trick to localStorage
-function saveTrickToStorage(trickName) {
-    let userTricks = JSON.parse(localStorage.getItem(currentUser + '_tricks')) || [];
-    userTricks.push(trickName);
-    localStorage.setItem(currentUser + '_tricks', JSON.stringify(userTricks));
+function updateTrickCardUI(trickCard, trickData) {
+    let levelDiv = trickCard.querySelector('.trick-consistency');
+    let progress = trickCard.querySelector('.trick-progress');
+    if (levelDiv) {
+        levelDiv.innerText = 'LEVEL ' + trickData.level;
+    }
+    if (progress) {
+        progress.style.width = Math.min(trickData.level * 15, 100) + '%';
+    }
 }
 
-// Function to load saved tricks when page loads
+function markTrickCompleted(trickName, trickCard) {
+    let userTricks = getUserTricks();
+    let trick = userTricks.find(function(item) {
+        return item.name === trickName;
+    });
+    if (!trick) {
+        return;
+    }
+    trick.level = (trick.level || 1) + 1;
+    setUserTricks(userTricks);
+    updateTrickCardUI(trickCard, trick);
+    addXP(5);
+
+    let markBtn = trickCard.querySelector('.mark-trick-btn');
+    if (markBtn) {
+        markBtn.innerText = '+5 XP';
+        markBtn.style.backgroundColor = '#4CAF50';
+        markBtn.style.color = '#000000';
+        setTimeout(function() {
+            markBtn.innerText = 'MARK';
+            markBtn.style.backgroundColor = '';
+            markBtn.style.color = '';
+        }, 900);
+    }
+}
+
+
+// Function to save a trick to localStorage
+function getUserTricks() {
+    let storedTricks = JSON.parse(localStorage.getItem(currentUser + '_tricks')) || [];
+    return storedTricks.map(function(item) {
+        if (typeof item === 'string') {
+            return { name: item, level: 1 };
+        }
+        return item;
+    });
+}
+
+function setUserTricks(tricks) {
+    localStorage.setItem(currentUser + '_tricks', JSON.stringify(tricks));
+}
+
+function saveTrickToStorage(trickData) {
+    let userTricks = getUserTricks();
+    userTricks.push(trickData);
+    setUserTricks(userTricks);
+}
+
 function loadSavedTricks() {
-    let userTricks = JSON.parse(localStorage.getItem(currentUser + '_tricks')) || [];
+    let userTricks = getUserTricks();
     
     for (let i = 0; i < userTricks.length; i++) {
         createTrickCard(userTricks[i]);
