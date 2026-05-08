@@ -235,3 +235,282 @@ body {
     letter-spacing: 1px;
 }
 
+/* ============ RESPONSIVE DESIGN ============ */
+
+/* Tablets (600px - 899px) */
+@media (max-width: 900px) {
+    .login-card {
+        padding: 30px 25px;
+    }
+    
+    .logo-section {
+        margin-bottom: 30px;
+        padding-bottom: 15px;
+    }
+    
+    .logo {
+        font-size: 32px;
+        letter-spacing: 2px;
+    }
+    
+    .tagline {
+        font-size: 11px;
+        letter-spacing: 1px;
+        margin-top: 12px;
+    }
+    
+    .login-input {
+        padding: 14px 45px 14px 15px;
+        font-size: 14px;
+    }
+    
+    .input-icon {
+        font-size: 16px;
+        right: 15px;
+    }
+    
+    .login-btn {
+        padding: 16px;
+        font-size: 16px;
+        gap: 12px;
+    }
+    
+    .btn-icon {
+        font-size: 20px;
+    }
+    
+    .social-btn {
+        width: 45px;
+        height: 45px;
+        font-size: 16px;
+    }
+}
+
+/* Mobile phones (480px - 599px) */
+@media (max-width: 600px) {
+    .login-container {
+        max-width: 100%;
+        padding: 15px;
+    }
+    
+    .login-card {
+        padding: 25px 20px;
+        border: 3px solid #ffffff;
+    }
+    
+    .logo-section {
+        margin-bottom: 25px;
+        padding-bottom: 15px;
+    }
+    
+    .logo {
+        font-size: 26px;
+        letter-spacing: 1px;
+        margin-bottom: 8px;
+    }
+    
+    .xp {
+        padding: 2px 6px;
+    }
+    
+    .tagline {
+        font-size: 10px;
+        letter-spacing: 0.5px;
+        margin-top: 10px;
+    }
+    
+    .input-group {
+        margin-bottom: 15px;
+    }
+    
+    .login-input {
+        padding: 12px 40px 12px 12px;
+        font-size: 13px;
+        border: 2px solid #ffffff;
+    }
+    
+    .input-icon {
+        font-size: 14px;
+        right: 12px;
+    }
+    
+    .login-btn {
+        padding: 14px;
+        font-size: 14px;
+        gap: 10px;
+        margin-top: 8px;
+    }
+    
+    .btn-icon {
+        font-size: 18px;
+    }
+    
+    .login-options {
+        margin-bottom: 20px;
+    }
+    
+    .forgot-link {
+        font-size: 12px;
+    }
+    
+    .divider {
+        margin: 20px 0;
+    }
+    
+    .divider-text {
+        padding: 0 12px;
+        font-size: 10px;
+        letter-spacing: 1px;
+    }
+    
+    .signup-btn {
+        padding: 12px 20px;
+        font-size: 12px;
+    }
+    
+    .social-section {
+        padding-top: 15px;
+    }
+    
+    .social-text {
+        font-size: 10px;
+        margin-bottom: 12px;
+        letter-spacing: 1px;
+    }
+    
+    .social-buttons {
+        gap: 12px;
+    }
+    
+    .social-btn {
+        width: 40px;
+        height: 40px;
+        font-size: 14px;
+    }
+    
+    .version {
+        font-size: 10px;
+    }
+    
+    .login-footer {
+        margin-top: 20px;
+        font-size: 11px;
+    }
+}
+
+/* Small phones (under 480px) */
+@media (max-width: 480px) {
+    .login-container {
+        padding: 10px;
+    }
+    
+    .login-card {
+        padding: 20px 15px;
+        border: 2px solid #ffffff;
+    }
+    
+    .logo-section {
+        margin-bottom: 20px;
+        padding-bottom: 12px;
+        border-bottom: 2px solid #ffffff;
+    }
+    
+    .logo {
+        font-size: 22px;
+        letter-spacing: 0px;
+        margin-bottom: 6px;
+    }
+    
+    .xp {
+        padding: 2px 4px;
+        font-size: 0.8em;
+    }
+    
+    .tagline {
+        font-size: 9px;
+        letter-spacing: 0px;
+        margin-top: 8px;
+    }
+    
+    .login-form {
+        margin-bottom: 20px;
+    }
+    
+    .input-group {
+        margin-bottom: 12px;
+    }
+    
+    .login-input {
+        padding: 10px 35px 10px 10px;
+        font-size: 12px;
+        border: 2px solid #ffffff;
+    }
+    
+    .input-icon {
+        font-size: 12px;
+        right: 10px;
+    }
+    
+    .login-btn {
+        padding: 12px;
+        font-size: 12px;
+        gap: 8px;
+    }
+    
+    .btn-icon {
+        font-size: 16px;
+    }
+    
+    .login-options {
+        margin-bottom: 15px;
+    }
+    
+    .forgot-link {
+        font-size: 11px;
+    }
+    
+    .divider {
+        margin: 15px 0;
+    }
+    
+    .divider-text {
+        padding: 0 10px;
+        font-size: 9px;
+    }
+    
+    .signup-btn {
+        padding: 10px 15px;
+        font-size: 11px;
+    }
+    
+    .social-section {
+        padding-top: 12px;
+        border-top: 2px solid #ffffff;
+    }
+    
+    .social-text {
+        font-size: 9px;
+        margin-bottom: 10px;
+    }
+    
+    .social-buttons {
+        gap: 10px;
+    }
+    
+    .social-btn {
+        width: 36px;
+        height: 36px;
+        font-size: 12px;
+    }
+    
+    .version {
+        font-size: 9px;
+        margin-top: 10px;
+    }
+    
+    .login-footer {
+        margin-top: 15px;
+        font-size: 10px;
+    }
+}
+

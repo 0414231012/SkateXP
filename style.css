@@ -9,12 +9,16 @@ body {
     background: #000000;
     color: #ffffff;
     min-height: 100vh;
+    display: flex;
+    flex-direction: column;
 }
 
 .container {
     max-width: 400px;
     margin: 0 auto;
     padding: 20px;
+    flex: 1;
+    width: 100%;
 }
 
 /* Header */
@@ -92,6 +96,43 @@ body {
 .login-btn-header:hover {
     background: #ffffff;
     color: #000000;
+}
+
+.learn-tricks-btn {
+    background: #000000;
+    border: 2px solid #ffffff;
+    padding: 8px 14px;
+    color: #ffffff;
+    font-weight: 900;
+    font-size: 12px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    letter-spacing: 1px;
+    text-decoration: none;
+    display: inline-block;
+}
+
+.learn-tricks-btn:hover {
+    background: #ffffff;
+    color: #000000;
+    transform: scale(1.05);
+}
+
+/* App Footer */
+.app-footer {
+    background: #111111;
+    border-top: 3px solid #ffffff;
+    padding: 20px;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
+
+.app-footer .learn-tricks-btn {
+    width: 100%;
+    max-width: 300px;
 }
 
 /* Stats Grid */
@@ -433,4 +474,372 @@ body {
     font-size: 10px;
     font-weight: 900;
     letter-spacing: 1px;
+}
+
+/* ============ RESPONSIVE DESIGN ============ */
+
+/* Tablets and larger phones (600px - 899px) */
+@media (max-width: 900px) {
+    .container {
+        max-width: 100%;
+        padding: 15px;
+    }
+    
+    .app-footer {
+        padding: 15px;
+    }
+    
+    .header {
+        margin-bottom: 25px;
+        padding: 15px 0;
+    }
+    
+    .logo {
+        font-size: 24px;
+    }
+    
+    .header-right {
+        gap: 12px;
+    }
+    
+    .user-level,
+    .login-btn-header,
+    .learn-tricks-btn {
+        padding: 6px 12px;
+        font-size: 11px;
+    }
+    
+    .stat-number {
+        font-size: 28px;
+    }
+    
+    .section-title {
+        font-size: 16px;
+    }
+    
+    .session-btn {
+        padding: 15px 30px;
+        font-size: 16px;
+    }
+    
+    .badge-icon {
+        font-size: 20px;
+    }
+    
+    .badge-name {
+        font-size: 9px;
+    }
+}
+
+/* Mobile phones (480px - 599px) */
+@media (max-width: 600px) {
+    .container {
+        max-width: 100%;
+        padding: 12px;
+    }
+    
+    .app-footer {
+        padding: 12px;
+    }
+    
+    .header {
+        margin-bottom: 20px;
+        padding: 12px 0;
+        flex-direction: column;
+        gap: 10px;
+        border-bottom: 2px solid #ffffff;
+    }
+    
+    .logo {
+        font-size: 20px;
+        letter-spacing: 1px;
+    }
+    
+    .xp {
+        padding: 2px 4px;
+        border: 2px solid #ffffff;
+    }
+    
+    .header-right {
+        width: 100%;
+        justify-content: space-between;
+        gap: 10px;
+    }
+    
+    .user-level,
+    .login-btn-header,
+    .learn-tricks-btn {
+        padding: 6px 10px;
+        font-size: 10px;
+        flex: 1;
+        text-align: center;
+    }
+    
+    /* Stats Grid - Stack on smaller screens */
+    .stats-grid {
+        grid-template-columns: 1fr;
+        gap: 12px;
+        margin-bottom: 25px;
+    }
+    
+    .stat-card {
+        padding: 15px;
+        border: 2px solid #ffffff;
+    }
+    
+    .stat-number {
+        font-size: 24px;
+    }
+    
+    .stat-label {
+        font-size: 11px;
+        letter-spacing: 1px;
+    }
+    
+    .streak-fire {
+        font-size: 18px;
+    }
+    
+    /* Session Section */
+    .session-section {
+        margin-bottom: 30px;
+    }
+    
+    .session-btn {
+        padding: 12px 20px;
+        font-size: 14px;
+        gap: 8px;
+    }
+    
+    .btn-icon {
+        font-size: 20px;
+    }
+    
+    .last-session {
+        font-size: 12px;
+        margin-top: 12px;
+    }
+    
+    /* Section Header */
+    .section-title {
+        font-size: 14px;
+        letter-spacing: 1px;
+    }
+    
+    .add-trick-btn,
+    .info-btn {
+        padding: 6px 10px;
+        font-size: 11px;
+    }
+    
+    /* Add Trick Form */
+    .add-trick-form {
+        padding: 15px;
+        margin-bottom: 20px;
+        border: 2px solid #ffffff;
+    }
+    
+    .trick-input {
+        padding: 12px;
+        font-size: 14px;
+        margin-bottom: 12px;
+    }
+    
+    .save-btn,
+    .cancel-btn {
+        padding: 10px 16px;
+        font-size: 12px;
+    }
+    
+    /* Trick Card */
+    .trick-card {
+        padding: 12px;
+        border-left: 4px solid #ffffff;
+        gap: 8px;
+    }
+    
+    .trick-name {
+        font-size: 14px;
+        margin-bottom: 6px;
+    }
+    
+    .trick-consistency {
+        font-size: 12px;
+        margin-bottom: 6px;
+    }
+    
+    .mark-trick-btn {
+        padding: 6px 10px;
+        font-size: 11px;
+    }
+    
+    .delete-trick-btn {
+        font-size: 14px;
+    }
+    
+    /* Badges Grid - Stack for very small screens */
+    .badges-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 12px;
+    }
+    
+    .badge {
+        padding: 15px 8px;
+        border: 2px solid #ffffff;
+    }
+    
+    .badge-icon {
+        font-size: 18px;
+        margin-bottom: 6px;
+    }
+    
+    .badge-name {
+        font-size: 8px;
+        letter-spacing: 0.5px;
+    }
+}
+
+/* Small phones (under 480px) */
+@media (max-width: 480px) {
+    .container {
+        padding: 10px;
+    }
+    
+    .app-footer {
+        padding: 10px;
+    }
+    
+    .header {
+        gap: 8px;
+        padding: 10px 0;
+    }
+    
+    .logo {
+        font-size: 18px;
+        letter-spacing: 0px;
+    }
+    
+    .header-right {
+        gap: 8px;
+    }
+    
+    .user-level,
+    .login-btn-header,
+    .learn-tricks-btn {
+        padding: 5px 8px;
+        font-size: 9px;
+    }
+    
+    .stats-grid {
+        gap: 10px;
+        margin-bottom: 20px;
+    }
+    
+    .stat-card {
+        padding: 12px;
+        border: 2px solid #ffffff;
+    }
+    
+    .stat-number {
+        font-size: 20px;
+    }
+    
+    .stat-label {
+        font-size: 10px;
+    }
+    
+    .session-btn {
+        padding: 10px 16px;
+        font-size: 13px;
+        gap: 6px;
+    }
+    
+    .btn-icon {
+        font-size: 18px;
+    }
+    
+    .last-session {
+        font-size: 11px;
+    }
+    
+    .section-title {
+        font-size: 13px;
+        letter-spacing: 0.5px;
+    }
+    
+    .add-trick-btn,
+    .info-btn {
+        padding: 5px 8px;
+        font-size: 10px;
+    }
+    
+    .add-trick-form {
+        padding: 12px;
+    }
+    
+    .trick-input {
+        padding: 10px;
+        font-size: 13px;
+        margin-bottom: 10px;
+    }
+    
+    .form-buttons {
+        gap: 8px;
+    }
+    
+    .save-btn,
+    .cancel-btn {
+        padding: 8px 12px;
+        font-size: 11px;
+    }
+    
+    .trick-card {
+        padding: 10px;
+        border-left: 3px solid #ffffff;
+    }
+    
+    .trick-name {
+        font-size: 12px;
+        margin-bottom: 4px;
+    }
+    
+    .trick-consistency {
+        font-size: 11px;
+        margin-bottom: 4px;
+    }
+    
+    .mark-trick-btn {
+        padding: 5px 8px;
+        font-size: 10px;
+    }
+    
+    .delete-trick-btn {
+        font-size: 12px;
+    }
+    
+    .badges-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 10px;
+    }
+    
+    .badge {
+        padding: 12px 6px;
+        border: 2px solid #ffffff;
+    }
+    
+    .badge-icon {
+        font-size: 16px;
+        margin-bottom: 4px;
+    }
+    
+    .badge-name {
+        font-size: 7px;
+    }
+}
+
+/* Large screens (1200px and above) */
+@media (min-width: 1200px) {
+    .container {
+        max-width: 600px;
+    }
 }

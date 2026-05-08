@@ -159,6 +159,217 @@
     line-height: 1.4;
 }
 
+/* ============ RESPONSIVE DESIGN ============ */
+
+/* Tablets (600px - 899px) */
+@media (max-width: 900px) {
+    .back-btn {
+        padding: 8px 12px;
+        font-size: 11px;
+    }
+    
+    .badge-info-card {
+        padding: 15px;
+        gap: 12px;
+    }
+    
+    .badge-info-icon {
+        font-size: 32px;
+        min-width: 45px;
+    }
+    
+    .badge-info-title {
+        font-size: 14px;
+    }
+    
+    .badge-info-description {
+        font-size: 12px;
+    }
+    
+    .badge-requirement,
+    .badge-progress {
+        font-size: 11px;
+    }
+    
+    .tips-section {
+        padding: 15px;
+    }
+    
+    .tip-card {
+        padding: 12px;
+        gap: 10px;
+    }
+    
+    .tip-number {
+        width: 28px;
+        height: 28px;
+        font-size: 13px;
+    }
+    
+    .tip-title {
+        font-size: 11px;
+    }
+    
+    .tip-text {
+        font-size: 11px;
+    }
+}
+
+/* Mobile phones (480px - 599px) */
+@media (max-width: 600px) {
+    .back-btn {
+        padding: 8px 10px;
+        font-size: 10px;
+        margin-bottom: 15px;
+    }
+    
+    .badges-info-section {
+        margin-bottom: 30px;
+    }
+    
+    .badge-info-container {
+        gap: 15px;
+    }
+    
+    .badge-info-card {
+        padding: 12px;
+        gap: 10px;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
+    
+    .badge-info-icon {
+        font-size: 28px;
+        min-width: auto;
+    }
+    
+    .badge-info-title {
+        font-size: 13px;
+        margin-bottom: 6px;
+    }
+    
+    .badge-info-description {
+        font-size: 11px;
+        margin-bottom: 10px;
+    }
+    
+    .badge-requirement {
+        font-size: 10px;
+        justify-content: center;
+        margin-bottom: 8px;
+    }
+    
+    .badge-progress {
+        font-size: 10px;
+        justify-content: center;
+        padding-top: 6px;
+    }
+    
+    .tips-section {
+        padding: 12px;
+        margin-bottom: 30px;
+        border: 2px solid #ffffff;
+    }
+    
+    .tips-grid {
+        gap: 12px;
+        margin-top: 12px;
+    }
+    
+    .tip-card {
+        padding: 10px;
+        gap: 10px;
+    }
+    
+    .tip-number {
+        width: 26px;
+        height: 26px;
+        font-size: 12px;
+        flex-shrink: 0;
+    }
+    
+    .tip-title {
+        font-size: 10px;
+        margin-bottom: 2px;
+        letter-spacing: 0.5px;
+    }
+    
+    .tip-text {
+        font-size: 10px;
+        line-height: 1.3;
+    }
+}
+
+/* Small phones (under 480px) */
+@media (max-width: 480px) {
+    .back-btn {
+        padding: 6px 8px;
+        font-size: 9px;
+        margin-bottom: 12px;
+    }
+    
+    .badge-info-card {
+        padding: 10px;
+        gap: 8px;
+    }
+    
+    .badge-info-icon {
+        font-size: 24px;
+    }
+    
+    .badge-info-title {
+        font-size: 12px;
+        margin-bottom: 4px;
+    }
+    
+    .badge-info-description {
+        font-size: 10px;
+        margin-bottom: 8px;
+        line-height: 1.3;
+    }
+    
+    .badge-requirement {
+        font-size: 9px;
+        margin-bottom: 6px;
+    }
+    
+    .badge-progress {
+        font-size: 9px;
+        padding-top: 4px;
+    }
+    
+    .tips-section {
+        padding: 10px;
+        margin-bottom: 25px;
+    }
+    
+    .tips-grid {
+        gap: 10px;
+        margin-top: 10px;
+    }
+    
+    .tip-card {
+        padding: 8px;
+        gap: 8px;
+    }
+    
+    .tip-number {
+        width: 24px;
+        height: 24px;
+        font-size: 11px;
+    }
+    
+    .tip-title {
+        font-size: 9px;
+    }
+    
+    .tip-text {
+        font-size: 9px;
+        line-height: 1.2;
+    }
+}
+
 @media (max-width: 500px) {
     .badge-info-card {
         flex-direction: column;
