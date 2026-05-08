@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SkateXP - Badges</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="badges-style.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <header class="header">
+            <h1 class="logo">SKATE<span class="xp">XP</span></h1>
+            <div class="header-right">
+                <div class="user-level">LVL ?</div>
+                <a class="login-btn-header" href="/login.html">User</a>
+            </div>
+        </header>
+
+        <!-- Back Button -->
+        <div class="nav-section">
+            <a href="index.html" class="back-btn">← BACK</a>
+        </div>
+
+        <!-- Badges Info Section -->
+        <section class="badges-info-section">
+            <h2 class="section-title">BADGE INFORMATION</h2>
+            
+            <div class="badge-info-container">
+                <!-- Week Warrior Badge -->
+                <div class="badge-info-card">
+                    <div class="badge-info-icon">🏆</div>
+                    <div class="badge-info-content">
+                        <h3 class="badge-info-title">WEEK WARRIOR</h3>
+                        <p class="badge-info-description">Maintain a 7-day skating streak without missing a day.</p>
+                        <div class="badge-requirement">
+                            <span class="requirement-label">REQUIREMENT:</span>
+                            <span class="requirement-text">Log a skating session every day for 7 consecutive days</span>
+                        </div>
+                        <div class="badge-progress">
+                            <span class="progress-label">YOUR STREAK:</span>
+                            <span class="progress-value" id="weekWarriorProgress">0 days</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Speed Demon Badge -->
+                <div class="badge-info-card">
+                    <div class="badge-info-icon">⚡</div>
+                    <div class="badge-info-content">
+                        <h3 class="badge-info-title">SPEED DEMON</h3>
+                        <p class="badge-info-description">Progress quickly by mastering a trick to level 5.</p>
+                        <div class="badge-requirement">
+                            <span class="requirement-label">REQUIREMENT:</span>
+                            <span class="requirement-text">Get any trick to Level 5 by marking it complete 4 times</span>
+                        </div>
+                        <div class="badge-progress">
+                            <span class="progress-label">HIGHEST TRICK LEVEL:</span>
+                            <span class="progress-value" id="speedDemonProgress">Level 1</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Street King Badge -->
+                <div class="badge-info-card locked-info">
+                    <div class="badge-info-icon">👑</div>
+                    <div class="badge-info-content">
+                        <h3 class="badge-info-title">STREET KING</h3>
+                        <p class="badge-info-description">Coming soon! This badge will be available in a future update.</p>
+                        <div class="badge-requirement">
+                            <span class="requirement-label">STATUS:</span>
+                            <span class="requirement-text">🔒 NOT AVAILABLE YET</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Tips Section -->
+        <section class="tips-section">
+            <h2 class="section-title">HOW TO EARN BADGES</h2>
+            <div class="tips-grid">
+                <div class="tip-card">
+                    <div class="tip-number">1</div>
+                    <div class="tip-title">CONSISTENCY IS KEY</div>
+                    <p class="tip-text">Skate every day to build your streak and unlock the Week Warrior badge!</p>
+                </div>
+                <div class="tip-card">
+                    <div class="tip-number">2</div>
+                    <div class="tip-title">MASTER YOUR TRICKS</div>
+                    <p class="tip-text">Mark tricks as complete whenever you land them to level them up and earn the Speed Demon badge!</p>
+                </div>
+                <div class="tip-card">
+                    <div class="tip-number">3</div>
+                    <div class="tip-title">TRACK PROGRESS</div>
+                    <p class="tip-text">Add new tricks and watch them progress from Level 1 to mastery. More tricks = faster progression!</p>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <script src="script.js"></script>
+    <script src="badges.js"></script>
+</body>
+</html>

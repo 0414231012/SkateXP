@@ -1,0 +1,172 @@
+/* Badges Info Page Styles */
+
+.nav-section {
+    margin-bottom: 20px;
+}
+
+.back-btn {
+    display: inline-block;
+    background: #000000;
+    border: 2px solid #ffffff;
+    padding: 10px 16px;
+    color: #ffffff;
+    font-weight: 900;
+    font-size: 12px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    letter-spacing: 1px;
+    text-decoration: none;
+}
+
+.back-btn:hover {
+    background: #ffffff;
+    color: #000000;
+}
+
+.badges-info-section {
+    margin-bottom: 40px;
+}
+
+.badge-info-container {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.badge-info-card {
+    background: #000000;
+    border: 2px solid #ffffff;
+    padding: 20px;
+    display: flex;
+    gap: 15px;
+    align-items: flex-start;
+}
+
+.badge-info-card.locked-info {
+    opacity: 0.6;
+    border-color: #666666;
+}
+
+.badge-info-icon {
+    font-size: 36px;
+    min-width: 50px;
+    text-align: center;
+    line-height: 1;
+}
+
+.badge-info-content {
+    flex: 1;
+}
+
+.badge-info-title {
+    font-size: 16px;
+    font-weight: 900;
+    letter-spacing: 1px;
+    margin-bottom: 8px;
+    color: #ffffff;
+}
+
+.badge-info-description {
+    font-size: 13px;
+    margin-bottom: 12px;
+    line-height: 1.4;
+    color: #cccccc;
+}
+
+.badge-requirement {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 10px;
+    font-size: 12px;
+    flex-wrap: wrap;
+}
+
+.requirement-label {
+    font-weight: 900;
+    color: #ffffff;
+}
+
+.requirement-text {
+    color: #aaaaaa;
+}
+
+.badge-progress {
+    display: flex;
+    gap: 10px;
+    font-size: 12px;
+    flex-wrap: wrap;
+    padding-top: 8px;
+    border-top: 1px solid #333333;
+}
+
+.progress-label {
+    font-weight: 900;
+    color: #ffffff;
+}
+
+.progress-value {
+    color: #ffff00;
+    font-weight: 900;
+}
+
+/* Tips Section */
+.tips-section {
+    background: #111111;
+    border: 2px solid #ffffff;
+    padding: 20px;
+    margin-bottom: 40px;
+}
+
+.tips-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 15px;
+    margin-top: 15px;
+}
+
+.tip-card {
+    background: #000000;
+    border: 2px solid #ffffff;
+    padding: 15px;
+    display: flex;
+    gap: 12px;
+}
+
+.tip-number {
+    background: #ffffff;
+    color: #000000;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 900;
+    flex-shrink: 0;
+}
+
+.tip-title {
+    font-weight: 900;
+    font-size: 12px;
+    letter-spacing: 1px;
+    margin-bottom: 4px;
+    color: #ffffff;
+}
+
+.tip-text {
+    font-size: 12px;
+    color: #aaaaaa;
+    line-height: 1.4;
+}
+
+@media (max-width: 500px) {
+    .badge-info-card {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
+    
+    .badge-info-icon {
+        font-size: 48px;
+    }
+}

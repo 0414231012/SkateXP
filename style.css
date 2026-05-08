@@ -57,6 +57,25 @@ body {
     letter-spacing: 1px;
 }
 
+.user-level.level-up {
+    animation: levelUpPulse 0.6s ease-out;
+}
+
+@keyframes levelUpPulse {
+    0% {
+        transform: scale(1);
+        box-shadow: 0 0 0 0 rgba(255, 255, 255, 0.7);
+    }
+    50% {
+        transform: scale(1.1);
+        box-shadow: 0 0 0 10px rgba(255, 255, 255, 0);
+    }
+    100% {
+        transform: scale(1);
+        box-shadow: 0 0 0 0 rgba(255, 255, 255, 0);
+    }
+}
+
 .login-btn-header {
     background: #000000;
     border: 2px solid #ffffff;
@@ -198,6 +217,24 @@ body {
 
 
 .add-trick-btn:hover {
+    background: #ffffff;
+    color: #000000;
+}
+
+.info-btn {
+    background: #000000;
+    border: 2px solid #ffffff;
+    padding: 8px 12px;
+    color: #ffffff;
+    font-weight: 900;
+    font-size: 14px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    text-decoration: none;
+    display: inline-block;
+}
+
+.info-btn:hover {
     background: #ffffff;
     color: #000000;
 }
