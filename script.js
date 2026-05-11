@@ -52,15 +52,13 @@ function updateStreak() {
         let lastDate = new Date(lastSkateDate);
         let daysDiff = Math.floor((today - lastDate) / (1000 * 60 * 60 * 24));
         
-        if (daysDiff === 1) {
-            // Skated yesterday, continue streak and give motivation
+        if (daysDiff < 4) {
+            // Skated within 3 days, continue streak
             currentStreak += 1;
-            alert('Streak updated! 😎')
-        } else if (daysDiff >= 3) {
-            // Missed 3+ days, reset streak
+        } else if (daysDiff >= 4) {
+            // Missed 4+ days, reset streak
             currentStreak = 1;
             //alert the user they lost their streak
-            alert('Its been 3 days! you lost your streak!😭')
         } else if (daysDiff === 0) {
             // Already skated today, don't change streak
             return false;
@@ -156,7 +154,7 @@ function displayLastSession() {
                 lastSessionText.innerText = 'Last session: Yesterday';
             }
             
-            else if (daysDiff > 2) {
+            else if (daysDiff > 3) {
                 lastSessionText.innerText = "You lost your streak! Last session: " + daysDiff + " days ago ";
                 let currentStreak = parseInt(localStorage.getItem(currentUser + '_streak')) || 0;
                 currentStreak = 0;
