@@ -9,7 +9,7 @@ loginForm.addEventListener('submit', function(event) {
     
     // Get the skater name using class instead of placeholder
     let usernameInput = document.querySelector('.login-input');
-    let username = usernameInput.value;
+    let username = usernameInput.value.trim();
     
     // Check if they entered a name
     if (username === '') {

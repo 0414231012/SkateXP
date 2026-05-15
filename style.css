@@ -185,6 +185,13 @@ body {
     width: 0%;
 }
 
+.xp-details {
+    margin-top: 12px;
+    color: #cccccc;
+    font-size: 12px;
+    letter-spacing: 1px;
+}
+
 /* Session Logger */
 .session-section {
     text-align: center;

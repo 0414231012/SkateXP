@@ -23,6 +23,9 @@ loginButton.addEventListener('click', function(event) {
 // Update user level in header
 function displayUserLevel() {
     let userLevel = document.querySelector('.user-level');
+    if (!userLevel) {
+        return;
+    }
     let currentXP = parseInt(localStorage.getItem(currentUser + '_xp')) || 0;
     let level = calculateLevelFromXP(currentXP);
     userLevel.innerText = 'LVL ' + level;
@@ -49,7 +52,9 @@ function updateBadgeProgress() {
     // Week Warrior Progress
     let currentStreak = parseInt(localStorage.getItem(currentUser + '_streak')) || 0;
     let weekWarriorProgressEl = document.getElementById('weekWarriorProgress');
-    weekWarriorProgressEl.innerText = currentStreak + ' days';
+    if (weekWarriorProgressEl) {
+        weekWarriorProgressEl.innerText = currentStreak + ' days';
+    }
     
     // Speed Demon Progress
     let userTricks = getUserTricks();
@@ -61,12 +66,22 @@ function updateBadgeProgress() {
         }
     });
     let speedDemonProgressEl = document.getElementById('speedDemonProgress');
-    speedDemonProgressEl.innerText = 'Level ' + highestLevel;
+    if (speedDemonProgressEl) {
+        speedDemonProgressEl.innerText = 'Level ' + highestLevel;
+    }
+}
+
+function safeParseJSON(value) {
+    try {
+        return JSON.parse(value);
+    } catch (error) {
+        return [];
+    }
 }
 
 // Get user tricks (same function from script.js)
 function getUserTricks() {
-    let storedTricks = JSON.parse(localStorage.getItem(currentUser + '_tricks')) || [];
+    let storedTricks = safeParseJSON(localStorage.getItem(currentUser + '_tricks')) || [];
     return storedTricks.map(function(item) {
         if (typeof item === 'string') {
             return { name: item, level: 1 };

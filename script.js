@@ -34,6 +34,7 @@ let streakNumber = document.querySelector('.streak .stat-number');
 let lastSessionText = document.querySelector('.last-session');
 let streakFire = document.querySelector('.streak-fire');
 let xpNumber = document.querySelector('.xp-card .stat-number');
+let xpDetails = document.querySelector('.xp-details');
 
 // Function to check if user already skated today
 function hasSkatedToday() {
@@ -42,36 +43,50 @@ function hasSkatedToday() {
     return lastSkateDate === today;
 }
 
+function getDaysDiff(startDate, endDate) {
+    let msPerDay = 1000 * 60 * 60 * 24;
+    let start = new Date(startDate);
+    let end = new Date(endDate);
+    start.setHours(0, 0, 0, 0);
+    end.setHours(0, 0, 0, 0);
+    return Math.round((end - start) / msPerDay);
+}
+
+function normalizeTrickName(name) {
+    return name.trim();
+}
+
+function safeParseJSON(value) {
+    try {
+        return JSON.parse(value);
+    } catch (error) {
+        return [];
+    }
+}
+
 function updateStreak() {
     let today = new Date();
     let todayString = today.toDateString();
     let lastSkateDate = localStorage.getItem(currentUser + '_lastSkate');
     let currentStreak = parseInt(localStorage.getItem(currentUser + '_streak')) || 0;
-    
+
+    if (lastSkateDate === todayString) {
+        return false;
+    }
+
     if (lastSkateDate) {
-        let lastDate = new Date(lastSkateDate);
-        let daysDiff = Math.floor((today - lastDate) / (1000 * 60 * 60 * 24));
-        
-        if (daysDiff < 4) {
-            // Skated within 3 days, continue streak
+        let daysDiff = getDaysDiff(lastSkateDate, today);
+        if (daysDiff >= 1 && daysDiff <= 3) {
             currentStreak += 1;
-        } else if (daysDiff >= 4) {
-            // Missed 4+ days, reset streak
+        } else {
             currentStreak = 1;
-            //alert the user they lost their streak
-        } else if (daysDiff === 0) {
-            // Already skated today, don't change streak
-            return false;
         }
     } else {
-        // First time skating and give alert
         currentStreak = 1;
     }
-    
-    // Save the new data
+
     localStorage.setItem(currentUser + '_lastSkate', todayString);
     localStorage.setItem(currentUser + '_streak', currentStreak);
-    
     return true;
 }
 
@@ -82,7 +97,7 @@ function handleSkateSession() {
     if (hasSkatedToday()) {
         // Change button temporarily
         sessionBtn.innerText = '✅ Already logged today!';
-        sessionBtn.style.backgroundColor = '#orange';
+        sessionBtn.style.backgroundColor = 'orange';
         
         // Reset after 2 seconds
         setTimeout(function() {
@@ -117,76 +132,74 @@ function handleSkateSession() {
 
 // gets current streak from local storage and 
 // changes emoji for the streak and number
+function getActiveStreak() {
+    let currentStreak = parseInt(localStorage.getItem(currentUser + '_streak')) || 0;
+    let lastSkateDate = localStorage.getItem(currentUser + '_lastSkate');
+    if (!lastSkateDate || currentStreak <= 0) {
+        return 0;
+    }
+
+    let daysDiff = getDaysDiff(lastSkateDate, new Date());
+    return daysDiff >= 0 && daysDiff <= 3 ? currentStreak : 0;
+}
+
 function displayStreak() {
-    let currentStreak = parseInt(localStorage.getItem(currentUser + '_streak'))  ||0;
-    //change streak icon
-    if (currentStreak > 0){ 
-        streakFire.innerText = "🔥"
+    let currentStreak = getActiveStreak();
+    streakNumber.innerText = currentStreak;
+
+    if (currentStreak >= 50) {
+        streakFire.innerText = '⚡️';
+    } else if (currentStreak >= 10) {
+        streakFire.innerText = '⭐️';
+    } else if (currentStreak > 0) {
+        streakFire.innerText = '🔥';
+    } else {
+        streakFire.innerText = '';
     }
-    if (currentStreak >= 10){
-        streakFire.innerText = "⭐️"
-    }
-    if (currentStreak >= 50){
-        streakFire.innerText = "⚡️"
-    }
-    // change the actual number
-    streakNumber.innerText = currentStreak
 }
 
 function displayLastSession() {
     let lastSkateDate = localStorage.getItem(currentUser + '_lastSkate');
-    
-    if (lastSkateDate) {
-        let lastDate = new Date(lastSkateDate);
-        let today = new Date();
-        
-        // Compare just the dates (ignore time)
-        let todayDateString = today.toDateString();
-        let lastDateString = lastDate.toDateString();
-        
-        if (todayDateString === lastDateString) {
-            lastSessionText.innerText = 'Last session: Today!';
-        } else {
-            // Calculate days difference properly
-            let daysDiff = Math.floor((today.setHours(0,0,0,0) - lastDate.setHours(0,0,0,0)) / (1000 * 60 * 60 * 24));
-            
-            if (daysDiff === 1) {
-                lastSessionText.innerText = 'Last session: Yesterday';
-            }
-            
-            else if (daysDiff > 3) {
-                lastSessionText.innerText = "You lost your streak! Last session: " + daysDiff + " days ago ";
-                let currentStreak = parseInt(localStorage.getItem(currentUser + '_streak')) || 0;
-                currentStreak = 0;
-                displayStreak();
-                } 
 
-            else {
-                lastSessionText.innerText = 'Last session: ' + daysDiff + ' days ago';
-            }
-        }
-    } else {
+    if (!lastSkateDate) {
         lastSessionText.innerText = 'Last session: Never';
+        return;
     }
+
+    let daysDiff = getDaysDiff(lastSkateDate, new Date());
+
+    if (daysDiff === 0) {
+        lastSessionText.innerText = 'Last session: Today!';
+    } else if (daysDiff === 1) {
+        lastSessionText.innerText = 'Last session: Yesterday';
+    } else {
+        lastSessionText.innerText = 'Last session: ' + daysDiff + ' days ago';
+    }
+}
+
+function clampXP(value) {
+    return Math.max(0, value);
 }
 
 function addXP(amount) {
     let previousLevelData = calculateLevel();
     let currentXP = parseInt(localStorage.getItem(currentUser + '_xp')) || 0;
-    currentXP += amount;
+    currentXP = clampXP(currentXP + amount);
     localStorage.setItem(currentUser + '_xp', currentXP);
     let newLevelData = calculateLevel();
-    
-    // Check if leveled up
+
     if (newLevelData.level > previousLevelData.level) {
         triggerLevelUpAnimation();
     }
-    
+
     displayXP();
 }
 
 function triggerLevelUpAnimation() {
     let userLevel = document.querySelector('.user-level');
+    if (!userLevel) {
+        return;
+    }
     userLevel.classList.remove('level-up');
     // Trigger reflow to restart animation
     void userLevel.offsetWidth;
@@ -222,16 +235,23 @@ function displayXP() {
     let currentXP = parseInt(localStorage.getItem(currentUser + '_xp')) || 0;
     let levelData = calculateLevel();
     
-    // Update XP display
     xpNumber.innerText = currentXP;
     
-    // Update progress bar
     let xpProgress = document.querySelector('.xp-progress');
-    xpProgress.style.width = levelData.progress + '%';
-    
-    // Update level display
+    if (xpProgress) {
+        xpProgress.style.width = levelData.progress + '%';
+    }
+
     let userLevel = document.querySelector('.user-level');
-    userLevel.innerText = 'LVL ' + levelData.level;
+    if (userLevel) {
+        userLevel.innerText = 'LVL ' + levelData.level;
+    }
+
+    if (xpDetails) {
+        let nextLevelXP = getXPNeededForLevel(levelData.level + 1);
+        let xpRemaining = Math.max(nextLevelXP - currentXP, 0);
+        xpDetails.innerText = 'Next level in ' + xpRemaining + ' XP';
+    }
 }
 
 // Calculate cumulative XP needed to reach a specific level
@@ -268,7 +288,6 @@ function calculateLevel() {
     };
 }
 
-
 // Get the elements we need for adding a new trick
 let addTrickBtn = document.querySelector('.add-trick-btn');
 let addTrickForm = document.querySelector('.add-trick-form');
@@ -280,83 +299,65 @@ let tricksGrid = document.querySelector('.tricks-grid');
 // Function to show the add trick form
 function showAddTrickForm() {
     addTrickForm.style.display = 'block';
+    trickInput.focus();
+    saveBtn.disabled = false;
 }
 
 // Function to hide the add trick form
 function hideAddTrickForm() {
     addTrickForm.style.display = 'none';
+    saveBtn.disabled = false;
 }
 
-// Function to save a new trick
 function saveNewTrick() {
-    let trickName = trickInput.value;
-    
-    // Disable the save button immediately
+    let trickName = normalizeTrickName(trickInput.value);
     saveBtn.disabled = true;
-    
+
     if (trickName === '') {
         trickInput.placeholder = 'Please enter a trick name!';
         trickInput.style.borderColor = 'red';
-        saveBtn.disabled = false; // Re-enable if error
+        saveBtn.disabled = false;
         return;
     }
-    
-    // Check if trick already exists
+
     let userTricks = getUserTricks();
-    let trickNameUpper = trickName.toUpperCase();
-    
+    let normalizedInput = trickName.toUpperCase();
+
     let trickExists = userTricks.some(function(trick) {
-        return trick.name.toUpperCase() === trickNameUpper;
+        return trick.name.toUpperCase() === normalizedInput;
     });
-    
+
     if (trickExists) {
         trickInput.value = '❌ Trick already exists!';
         trickInput.style.color = 'red';
-        
+
         setTimeout(function() {
             trickInput.value = '';
             trickInput.style.color = '';
-            saveBtn.disabled = false; // Re-enable
+            trickInput.style.borderColor = '';
+            saveBtn.disabled = false;
         }, 1500);
         return;
     }
-    
-    // Create and display the trick card
+
     let trickData = { name: trickName, level: 1 };
     createTrickCard(trickData);
-    
-    // Save to localStorage
     saveTrickToStorage(trickData);
-    
-    // Add XP for learning a new trick
     addXP(5);
-    
-    // Show success in the input field
+    updateBadgeDisplay();
+
     trickInput.value = '✅ Trick added! +5 XP';
     trickInput.style.color = 'green';
-    
-    // Reset and hide after 1.5 seconds
+
     setTimeout(function() {
         hideAddTrickForm();
         trickInput.value = '';
         trickInput.style.color = '';
         trickInput.style.borderColor = '';
         trickInput.placeholder = 'Enter trick name (e.g., Kickflip)';
-        saveBtn.disabled = false; // Re-enable when done
+        saveBtn.disabled = false;
     }, 1500);
 }
-
-function showAddTrickForm() {
-    addTrickForm.style.display = 'block';
-    saveBtn.disabled = false; // Make sure it's enabled when opening
-}
-
-function hideAddTrickForm() {
-    addTrickForm.style.display = 'none';
-    saveBtn.disabled = false; // Re-enable when cancelling
-}
-
-
 
 // Function to delete a trick
 function deleteTrick(trickName, trickCard) {
@@ -383,9 +384,6 @@ function deleteTrick(trickName, trickCard) {
         }, 300);
     }
 }
-
-
-
 
 // Function to create a trick card element
 function createTrickCard(trickData) {
@@ -485,10 +483,9 @@ function markTrickCompleted(trickName, trickCard) {
     }
 }
 
-
 // Function to save a trick to localStorage
 function getUserTricks() {
-    let storedTricks = JSON.parse(localStorage.getItem(currentUser + '_tricks')) || [];
+    let storedTricks = safeParseJSON(localStorage.getItem(currentUser + '_tricks')) || [];
     return storedTricks.map(function(item) {
         if (typeof item === 'string') {
             return { name: item, level: 1 };
@@ -514,7 +511,6 @@ function loadSavedTricks() {
         createTrickCard(userTricks[i]);
     }
 }
-
 
 // ============ BADGE SYSTEM ============
 
@@ -568,13 +564,14 @@ function updateBadgeDisplay() {
 // ============ END BADGE SYSTEM ============
 
 // Add clickables
-addTrickBtn.addEventListener('click', showAddTrickForm);
-cancelBtn.addEventListener('click', hideAddTrickForm);
-saveBtn.addEventListener('click', saveNewTrick);
-sessionBtn.addEventListener('click', handleSkateSession)
+if (addTrickBtn) addTrickBtn.addEventListener('click', showAddTrickForm);
+if (cancelBtn) cancelBtn.addEventListener('click', hideAddTrickForm);
+if (saveBtn) saveBtn.addEventListener('click', saveNewTrick);
+if (sessionBtn) sessionBtn.addEventListener('click', handleSkateSession);
 
 displayStreak();
 displayLastSession();
 displayXP();
+loadSavedTricks();
 updateBadgeDisplay();
 loadSavedTricks();
