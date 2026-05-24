@@ -18,14 +18,10 @@ loginButton.href = '#'; // Remove the link to login.html
 // Add logout functionality when user clicks their name
 loginButton.addEventListener('click', function(event) {
     event.preventDefault(); // Stop the link from working
-    
-    // Ask if they really want to logout
-    if (confirm('Log out ' + currentUser + '?')) {
-        // Clear the stored user
+    openConfirmDialog('Log out ' + currentUser + '?', function() {
         localStorage.removeItem('currentUser');
-        // Go back to login page
         window.location.href = 'login.html';
-    }
+    });
 });
 
 //get trick counter / session logger elements
@@ -295,6 +291,54 @@ let cancelBtn = document.querySelector('.cancel-btn');
 let saveBtn = document.querySelector('.save-btn');
 let trickInput = document.querySelector('.trick-input'); 
 let tricksGrid = document.querySelector('.tricks-grid');
+let confirmDialog = document.getElementById('confirmDialog');
+let confirmMessage = document.getElementById('confirmMessage');
+let confirmYesBtn = document.getElementById('confirmYesBtn');
+let confirmNoBtn = document.getElementById('confirmNoBtn');
+let pendingConfirmAction = null;
+
+function openConfirmDialog(message, action) {
+    if (!confirmMessage || !confirmDialog) {
+        if (typeof action === 'function') {
+            action();
+        }
+        return;
+    }
+
+    confirmMessage.innerText = message;
+    pendingConfirmAction = action;
+    confirmDialog.classList.remove('hidden');
+}
+
+function closeConfirmDialog() {
+    if (!confirmDialog) {
+        return;
+    }
+    confirmDialog.classList.add('hidden');
+    pendingConfirmAction = null;
+}
+
+function deleteTrickConfirmed(trickName, trickCard) {
+    // Add fade effect before removing
+    trickCard.style.opacity = '0.5';
+    setTimeout(function() {
+        // Remove from display
+        tricksGrid.removeChild(trickCard);
+
+        // Remove from localStorage
+        let userTricks = getUserTricks();
+        let index = userTricks.findIndex(function(trick) {
+            return trick.name === trickName;
+        });
+        if (index > -1) {
+            userTricks.splice(index, 1);
+        }
+        setUserTricks(userTricks);
+
+        // Remove XP and show update
+        addXP(-5);
+    }, 300);
+}
 
 // Function to show the add trick form
 function showAddTrickForm() {
@@ -361,28 +405,9 @@ function saveNewTrick() {
 
 // Function to delete a trick
 function deleteTrick(trickName, trickCard) {
-    if (confirm('Delete ' + trickName + '? You will lose 5 XP.')) {
-        // Add fade effect before removing
-        trickCard.style.opacity = '0.5';
-        
-        setTimeout(function() {
-            // Remove from display
-            tricksGrid.removeChild(trickCard);
-            
-            // Remove from localStorage
-            let userTricks = getUserTricks();
-            let index = userTricks.findIndex(function(trick) {
-                return trick.name === trickName;
-            });
-            if (index > -1) {
-                userTricks.splice(index, 1);
-            }
-            setUserTricks(userTricks);
-            
-            // Remove XP and show update
-            addXP(-5);
-        }, 300);
-    }
+    openConfirmDialog('Delete ' + trickName + '? You will lose 5 XP.', function() {
+        deleteTrickConfirmed(trickName, trickCard);
+    });
 }
 
 // Function to create a trick card element
@@ -568,10 +593,22 @@ if (addTrickBtn) addTrickBtn.addEventListener('click', showAddTrickForm);
 if (cancelBtn) cancelBtn.addEventListener('click', hideAddTrickForm);
 if (saveBtn) saveBtn.addEventListener('click', saveNewTrick);
 if (sessionBtn) sessionBtn.addEventListener('click', handleSkateSession);
+if (confirmYesBtn) confirmYesBtn.addEventListener('click', function() {
+    if (typeof pendingConfirmAction === 'function') {
+        pendingConfirmAction();
+    }
+    closeConfirmDialog();
+});
+if (confirmNoBtn) confirmNoBtn.addEventListener('click', closeConfirmDialog);
+if (confirmDialog) {
+    let overlay = confirmDialog.querySelector('.confirm-dialog-overlay');
+    if (overlay) {
+        overlay.addEventListener('click', closeConfirmDialog);
+    }
+}
 
 displayStreak();
 displayLastSession();
 displayXP();
 loadSavedTricks();
 updateBadgeDisplay();
-loadSavedTricks();

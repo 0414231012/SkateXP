@@ -358,6 +358,83 @@ body {
     color: #000000;
 }
 
+.confirm-dialog {
+    position: fixed;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+}
+
+.confirm-dialog.hidden {
+    display: none;
+}
+
+.confirm-dialog-overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.75);
+}
+
+.confirm-dialog-box {
+    position: relative;
+    background: #000000;
+    border: 3px solid #ffffff;
+    padding: 20px;
+    width: min(320px, calc(100% - 40px));
+    z-index: 1;
+    text-align: center;
+}
+
+.confirm-dialog-header {
+    font-size: 16px;
+    font-weight: 900;
+    letter-spacing: 2px;
+    margin-bottom: 12px;
+}
+
+.confirm-dialog-message {
+    color: #ffffff;
+    font-size: 14px;
+    margin-bottom: 20px;
+    line-height: 1.4;
+}
+
+.confirm-dialog-actions {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+}
+
+.confirm-yes-btn,
+.confirm-no-btn {
+    border: 2px solid #ffffff;
+    padding: 12px 18px;
+    font-weight: 900;
+    font-size: 12px;
+    letter-spacing: 1px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    min-width: 120px;
+}
+
+.confirm-yes-btn {
+    background: #ffffff;
+    color: #000000;
+}
+
+.confirm-no-btn {
+    background: #000000;
+    color: #ffffff;
+}
+
+.confirm-yes-btn:hover,
+.confirm-no-btn:hover {
+    background: #ffffff;
+    color: #000000;
+}
+
 /* Tricks Section */
 .tricks-grid {
     display: flex;
