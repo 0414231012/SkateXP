@@ -435,6 +435,52 @@ body {
     color: #000000;
 }
 
+.undo-snackbar {
+    position: fixed;
+    left: 50%;
+    bottom: 20px;
+    transform: translateX(-50%);
+    background: rgba(255, 255, 255, 0.1);
+    border: 2px solid #ffffff;
+    color: #ffffff;
+    padding: 14px 18px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    border-radius: 6px;
+    z-index: 1100;
+    min-width: 260px;
+    max-width: calc(100% - 40px);
+    backdrop-filter: blur(10px);
+}
+
+.undo-snackbar.hidden {
+    display: none;
+}
+
+.undo-snackbar span {
+    font-size: 13px;
+    font-weight: 900;
+    flex: 1;
+    color: #ffffff;
+}
+
+.undo-btn {
+    background: #ffffff;
+    color: #000000;
+    border: 2px solid #ffffff;
+    padding: 10px 14px;
+    font-weight: 900;
+    letter-spacing: 1px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.undo-btn:hover {
+    background: #000000;
+    color: #ffffff;
+}
+
 /* Tricks Section */
 .tricks-grid {
     display: flex;

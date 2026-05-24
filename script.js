@@ -295,7 +295,11 @@ let confirmDialog = document.getElementById('confirmDialog');
 let confirmMessage = document.getElementById('confirmMessage');
 let confirmYesBtn = document.getElementById('confirmYesBtn');
 let confirmNoBtn = document.getElementById('confirmNoBtn');
+let undoSnackbar = document.getElementById('undoSnackbar');
+let undoBtn = document.getElementById('undoBtn');
 let pendingConfirmAction = null;
+let lastDeletedTrick = null;
+let undoTimer = null;
 
 function openConfirmDialog(message, action) {
     if (!confirmMessage || !confirmDialog) {
@@ -318,6 +322,49 @@ function closeConfirmDialog() {
     pendingConfirmAction = null;
 }
 
+function showUndoSnackbar(message) {
+    if (!undoSnackbar) {
+        return;
+    }
+    let messageSpan = document.getElementById('undoSnackbarMessage');
+    if (messageSpan) {
+        messageSpan.innerText = message;
+    }
+    undoSnackbar.classList.remove('hidden');
+    if (undoTimer) {
+        clearTimeout(undoTimer);
+    }
+    undoTimer = setTimeout(hideUndoSnackbar, 5000);
+}
+
+function hideUndoSnackbar() {
+    if (!undoSnackbar) {
+        return;
+    }
+    undoSnackbar.classList.add('hidden');
+    if (undoTimer) {
+        clearTimeout(undoTimer);
+        undoTimer = null;
+    }
+    lastDeletedTrick = null;
+}
+
+function undoDelete() {
+    if (!lastDeletedTrick) {
+        hideUndoSnackbar();
+        return;
+    }
+
+    let userTricks = getUserTricks();
+    userTricks.push(lastDeletedTrick);
+    setUserTricks(userTricks);
+    createTrickCard(lastDeletedTrick);
+    addXP(5);
+    updateBadgeDisplay();
+
+    hideUndoSnackbar();
+}
+
 function deleteTrickConfirmed(trickName, trickCard) {
     // Add fade effect before removing
     trickCard.style.opacity = '0.5';
@@ -331,12 +378,14 @@ function deleteTrickConfirmed(trickName, trickCard) {
             return trick.name === trickName;
         });
         if (index > -1) {
+            lastDeletedTrick = userTricks[index];
             userTricks.splice(index, 1);
         }
         setUserTricks(userTricks);
 
         // Remove XP and show update
         addXP(-5);
+        showUndoSnackbar('Trick deleted. Undo?');
     }, 300);
 }
 
@@ -600,6 +649,7 @@ if (confirmYesBtn) confirmYesBtn.addEventListener('click', function() {
     closeConfirmDialog();
 });
 if (confirmNoBtn) confirmNoBtn.addEventListener('click', closeConfirmDialog);
+if (undoBtn) undoBtn.addEventListener('click', undoDelete);
 if (confirmDialog) {
     let overlay = confirmDialog.querySelector('.confirm-dialog-overlay');
     if (overlay) {
