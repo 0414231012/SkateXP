@@ -489,20 +489,24 @@ function createTrickCard(trickData) {
     actionGroup.className = 'trick-actions';
 
     let markBtn = document.createElement('button');
+    markBtn.type = 'button';
     markBtn.innerText = 'MARK';
     markBtn.className = 'mark-trick-btn';
     markBtn.title = 'Mark trick complete and earn XP';
     
-    markBtn.addEventListener('click', function() {
+    markBtn.addEventListener('click', function(event) {
+        event.preventDefault();
         markTrickCompleted(trickName, newTrickCard);
     });
 
     let deleteBtn = document.createElement('button');
+    deleteBtn.type = 'button';
     deleteBtn.innerText = '×';
     deleteBtn.className = 'delete-trick-btn';
     deleteBtn.title = 'Delete trick';
     
-    deleteBtn.addEventListener('click', function() {
+    deleteBtn.addEventListener('click', function(event) {
+        event.preventDefault();
         deleteTrick(trickName, newTrickCard);
     });
     
